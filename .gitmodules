@@ -1,3 +1,0 @@
-[submodule "SixcycleWiki/lib/django-wiki"]
-	path = SixcycleWiki/lib/django-wiki
-	url = https://github.com/sixcycle/django-wiki.git
