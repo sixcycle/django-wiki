@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'authentication'
+    'SixcycleWiki.authentication'
 ]
 
 MIDDLEWARE = [
