@@ -25,7 +25,7 @@ SECRET_KEY = '2kj%%^khue249%e_*$q$^n+0s$mso$q3+(jf@n&*8wl9ffv+^j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sixcycle-wiki-env.7dwtp34aiu.us-east-1.elasticbeanstalk.com']
 SITE_ID = 1
 # WIKI_ACCOUNT_HANDLING = False
 
