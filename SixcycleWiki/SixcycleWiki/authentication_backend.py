@@ -1,4 +1,4 @@
-from SixcycleWiki.authentication.models import ProxyUser
+from SixcycleWiki.SixcycleWiki.authentication.models import ProxyUser
 
 
 class MyBackend:
