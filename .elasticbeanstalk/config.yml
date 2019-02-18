@@ -3,7 +3,7 @@ branch-defaults:
     environment: wiki
     group_suffix: null
 environment-defaults:
-  authentication-env:
+  sixcycle-wiki:
     branch: master
     repository: origin
 global:
