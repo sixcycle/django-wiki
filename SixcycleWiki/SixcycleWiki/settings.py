@@ -32,6 +32,10 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'authtools',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +48,11 @@ INSTALLED_APPS = [
     'mptt',
     'sekizai',
     'sorl.thumbnail',
-    'wiki'
+    'wiki',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'authentication'
 ]
 
 MIDDLEWARE = [
@@ -60,6 +68,7 @@ MIDDLEWARE = [
 STATIC_ROOT = '/static'
 
 ROOT_URLCONF = 'SixcycleWiki.urls'
+AUTH_USER_MODEL = 'authentication.ProxyUser'
 
 TEMPLATES = [
     {
