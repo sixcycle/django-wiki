@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'authentication'
+    'SixcycleWiki.authentication'
 ]
 
 MIDDLEWARE = [
@@ -64,6 +64,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'SixcycleWiki.authentication_backend.MyBackend'
+]
+
 
 STATIC_ROOT = '/static'
 
@@ -99,8 +104,13 @@ WSGI_APPLICATION = 'SixcycleWiki.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'SixCycleDB',
+        'USER': 'sa',
+        'PASSWORD': 'p0o9i8u7',
+        'HOST': 'wiki-test.cd8omj5dryba.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 
