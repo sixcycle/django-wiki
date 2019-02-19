@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'SixcycleWiki.SixcycleWiki.authentication',
+    'SixcycleWiki.authentication',
 ]
 
 MIDDLEWARE = [
@@ -72,13 +72,13 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'SixcycleWiki.SixcycleWiki.authentication_backend.MyBackend'
+    'SixcycleWiki.authentication_backend.MyBackend'
 ]
 
 
 STATIC_ROOT = 'static'
 
-ROOT_URLCONF = 'SixcycleWiki.SixcycleWiki.urls'
+ROOT_URLCONF = 'SixcycleWiki.urls'
 AUTH_USER_MODEL = 'authentication.ProxyUser'
 
 TEMPLATES = [
