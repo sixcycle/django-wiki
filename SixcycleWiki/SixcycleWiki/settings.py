@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'wiki',
     'wiki.plugins.attachments.apps.AttachmentsConfig',
+    'wiki.plugins.images.apps.ImagesConfig',
+    'wiki.plugins.links.apps.LinksConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
