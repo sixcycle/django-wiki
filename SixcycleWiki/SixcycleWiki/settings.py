@@ -72,7 +72,7 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'SixcycleWiki.authentication_backend.MyBackend'
+    'SixcycleWiki.SixcycleWiki.authentication_backend.MyBackend'
 ]
 
 
