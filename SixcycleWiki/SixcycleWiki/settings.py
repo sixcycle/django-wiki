@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATIC_ROOT = '/static'
+STATIC_ROOT = 'static'
 
 ROOT_URLCONF = 'SixcycleWiki.urls'
 
