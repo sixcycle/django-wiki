@@ -52,10 +52,11 @@ INSTALLED_APPS = [
     'sekizai',
     'sorl.thumbnail',
     'wiki',
+    'wiki.plugins.attachments.apps.AttachmentsConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'SixcycleWiki.SixcycleWiki.authentication'
+    'SixcycleWiki.SixcycleWiki.authentication',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Adding these settings for application to work in HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
