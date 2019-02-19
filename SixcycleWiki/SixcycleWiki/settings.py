@@ -102,7 +102,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SixcycleWiki.wsgi.application'
+WSGI_APPLICATION = 'SixcycleWiki.SixcycleWiki.wsgi.application'
 
 
 # Database
