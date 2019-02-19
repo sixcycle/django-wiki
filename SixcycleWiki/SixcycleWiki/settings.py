@@ -70,7 +70,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-STATIC_ROOT = '/static'
+STATIC_ROOT = 'static'
 
 ROOT_URLCONF = 'SixcycleWiki.SixcycleWiki.urls'
 AUTH_USER_MODEL = 'authentication.ProxyUser'
