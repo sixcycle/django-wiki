@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2kj%%^khue249%e_*$q$^n+0s$mso$q3+(jf@n&*8wl9ffv+^j'
-
+AWS_ACCESS_KEY_ID = 'AKIAII3MV3YTNHV2RPPA'
+AWS_SECRET_ACCESS_KEY = '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'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -109,10 +110,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'SixcycleWiki.wsgi.application'
-
-AWS_ACCESS_KEY_ID = 'AKIAIMSQUO43OXMSYLOQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'sixcycle.wiki.name'
+AWS_STORAGE_BUCKET_NAME = 'sixcycle.wiki.storage'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
