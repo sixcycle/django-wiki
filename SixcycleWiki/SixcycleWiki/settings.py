@@ -83,7 +83,6 @@ AUTHENTICATION_BACKENDS = [
 STATIC_ROOT = 'static'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_CALLING_FORMAT = OrdinaryCallingFormat
 
 
 ROOT_URLCONF = 'SixcycleWiki.urls'
@@ -111,7 +110,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'SixcycleWiki.wsgi.application'
-AWS_STORAGE_BUCKET_NAME = 'sixcycle.wiki.storage'
+AWS_STORAGE_BUCKET_NAME = 'sixcycle-wiki-storage'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
