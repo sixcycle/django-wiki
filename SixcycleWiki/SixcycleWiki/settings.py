@@ -124,7 +124,7 @@ DATABASES = {
         'NAME': 'SixCycleDB',
         'USER': 'sa',
         'PASSWORD': 'p0o9i8u7',
-        'HOST': 'wiki-test.cd8omj5dryba.us-east-1.rds.amazonaws.com',
+        'HOST': 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
