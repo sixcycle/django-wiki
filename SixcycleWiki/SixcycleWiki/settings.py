@@ -109,7 +109,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'SixcycleWiki.wsgi.application'
-AWS_STORAGE_BUCKET_NAME = 'sixcycle-wiki-storage'
+AWS_STORAGE_BUCKET_NAME = 'sixcycle-wiki-storage/'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
