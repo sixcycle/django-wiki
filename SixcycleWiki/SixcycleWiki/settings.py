@@ -85,6 +85,7 @@ AUTHENTICATION_BACKENDS = [
 STATIC_ROOT = 'static'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+WIKI_STATICFILES_STORAGE = None
 
 
 ROOT_URLCONF = 'SixcycleWiki.urls'
