@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
-from boto.s3.connection import SubdomainCallingFormat
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2kj%%^khue249%e_*$q$^n+0s$mso$q3+(jf@n&*8wl9ffv+^j'
 AWS_ACCESS_KEY_ID = 'AKIAII3MV3YTNHV2RPPA'
 AWS_SECRET_ACCESS_KEY = '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'
+from boto.s3.connection import SubdomainCallingFormat
 AWS_CALLING_FORMAT = SubdomainCallingFormat
 
 # SECURITY WARNING: don't run with debug turned on in production!
