@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'sekizai',
     'sorl.thumbnail',
     'storages',
+    'boto3',
     'wiki',
     'wiki.plugins.attachments.apps.AttachmentsConfig',
     'wiki.plugins.images.apps.ImagesConfig',
