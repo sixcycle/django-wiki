@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from boto.s3.connection import SubdomainCallingFormat
+from boto.s3.connection import OrdinaryCallingFormat
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -83,7 +83,7 @@ AUTHENTICATION_BACKENDS = [
 STATIC_ROOT = 'static'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_CALLING_FORMAT = SubdomainCallingFormat
+AWS_CALLING_FORMAT = OrdinaryCallingFormat
 
 
 ROOT_URLCONF = 'SixcycleWiki.urls'
@@ -112,7 +112,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SixcycleWiki.wsgi.application'
 AWS_STORAGE_BUCKET_NAME = 'sixcycle.wiki.storage'
-AWS_AUTO_CREATE_BUCKET = True
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
