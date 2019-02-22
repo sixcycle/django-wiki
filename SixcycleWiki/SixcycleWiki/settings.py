@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     ]
 SITE_ID = 1
 # WIKI_ACCOUNT_HANDLING = False
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -168,6 +169,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Adding these settings for application to work in HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+ENVIRONMENT = os.environ.get('environment', None)
+if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
