@@ -88,7 +88,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 ROOT_URLCONF = 'SixcycleWiki.urls'
-AUTH_USER_MODEL = 'authentication.ProxyUser'
+AUTH_USER_MODEL = 'authentication.User'
 
 TEMPLATES = [
     {

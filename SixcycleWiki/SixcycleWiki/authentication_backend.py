@@ -1,10 +1,10 @@
-from SixcycleWiki.authentication.models import ProxyUser
+from SixcycleWiki.authentication.models import User
 
 
 class MyBackend:
     def authenticate(self, request, username=None, password=None):
         # Check the username/password and return a user.
-        user = ProxyUser.objects.filter(
+        user = User.objects.filter(
                 email=username
         ).first()
         if (user and
@@ -16,7 +16,7 @@ class MyBackend:
         return True
 
     def get_user(self, user_id):
-        user = ProxyUser.objects.filter(
+        user = User.objects.filter(
             id=user_id
         ).first()
         return user
