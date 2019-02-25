@@ -66,9 +66,23 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'SixcycleWiki.authentication',
+    'SixcycleWiki.rest',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'SixcycleWiki.pagination.StandardResultsSetPagination',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
 MIDDLEWARE = [
+    # 'rest_framework.authentication.BasicAuthentication',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,7 +93,8 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'SixcycleWiki.authentication_backend.MyBackend'
+    'SixcycleWiki.authentication_backend.MyBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
