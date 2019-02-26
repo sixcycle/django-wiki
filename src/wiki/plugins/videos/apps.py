@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from . import checks
 
 
-class ImagesConfig(AppConfig):
+class VideosConfig(AppConfig):
     name = 'wiki.plugins.videos'
     verbose_name = _("Wiki videos")
     label = 'wiki_videos'
