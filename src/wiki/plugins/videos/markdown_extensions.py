@@ -25,8 +25,6 @@ class VideoExtension(markdown.Extension):
 
     def extendMarkdown(self, md):
         md.inlinePatterns.add('dw-videos', VideoPattern(VIDEO_RE, md), '>link')
-        # md.inlinePatterns.add('dw-images', ImagePattern(IMAGE_RE, md), '>link')
-        # md.postprocessors.add('dw-images-cleanup', ImagePostprocessor(md), '>raw_html')
 
 
 class VideoPattern(markdown.inlinepatterns.Pattern):
@@ -43,7 +41,6 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
     """
 
     def handleMatch(self, m):
-        print("handling match")
         video = None
         video_id = None
         video_id = m.group("id").strip()
@@ -68,10 +65,6 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
                 "caption": caption_placeholder,
             },
         )
-        return html
-        print("html.split(caption_placeholder) is {}".format(
-            html.split(caption_placeholder)
-        ))
         html_before, html_after = html.split(caption_placeholder)
         placeholder_before = self.markdown.htmlStash.store(html_before)
         placeholder_after = self.markdown.htmlStash.store(html_after)
