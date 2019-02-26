@@ -44,7 +44,7 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         video = None
         video_id = None
         video_id = m.group("id").strip()
-        video_url = VideoRevision.objects.filter(
+        video_url = models.VideoRevision.objects.filter(
             plugin=video
         ).get_filename()
         print("video url is {}".format(
