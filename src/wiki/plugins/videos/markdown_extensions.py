@@ -44,6 +44,12 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         video = None
         video_id = None
         video_id = m.group("id").strip()
+        video_url = VideoRevision.objects.filter(
+            plugin=video
+        ).get_filename()
+        print("video url is {}".format(
+            video_url
+        ))
         try:
             image = models.Video.objects.get(
                 article=self.markdown.article,
@@ -61,8 +67,9 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         html = render_to_string(
             "wiki/plugins/videos/render.html",
             context={
-                "image": image,
+                "video": video,
                 "caption": caption_placeholder,
+                "video_url": video_url
             },
         )
         html_before, html_after = html.split(caption_placeholder)
