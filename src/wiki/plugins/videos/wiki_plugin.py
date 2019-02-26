@@ -3,7 +3,7 @@ from wiki.compat import url
 from wiki.core.plugins import registry
 from wiki.core.plugins.base import BasePlugin
 from wiki.plugins.videos import forms, models, settings, views
-from wiki.plugins.images.markdown_extensions import ImageExtension
+from wiki.plugins.videos.markdown_extensions import VideoExtension
 from wiki.plugins.notifications.settings import ARTICLE_EDIT
 from wiki.plugins.notifications.util import truncate_title
 
@@ -63,7 +63,7 @@ class VideoPlugin(BasePlugin):
             name='videos_add_revision'),
     ]}
 
-    markdown_extensions = [ImageExtension()]
+    markdown_extensions = [VideoExtension()]
 
 
 registry.register(VideoPlugin)
