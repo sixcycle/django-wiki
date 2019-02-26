@@ -4,8 +4,15 @@ from wiki.plugins.videos import models, settings
 
 VIDEO_RE = (
     r"(?:(?im)" +
-    # Match '[video:N'
+    # Match '[image:N'
     r"\[video\:(?P<id>[0-9]+)" +
+    # Match optional 'align'
+    r"(?:\s+align\:(?P<align>right|left))?" +
+    # Match optional 'size'
+    r"(?:\s+size\:(?P<size>default|small|medium|large|orig))?" +
+    # Match ']' and rest of line.
+    # Normally [^\n] could be replaced with a dot '.', since '.'
+    # does not match newlines, but inline processors run with re.DOTALL.
     r"\s*\](?P<trailer>[^\n]*)$" +
     # Match zero or more caption lines, each indented by four spaces.
     r"(?P<caption>(?:\n    [^\n]*)*))"
@@ -17,7 +24,7 @@ class VideoExtension(markdown.Extension):
     """ Images plugin markdown extension for django-wiki. """
 
     def extendMarkdown(self, md):
-        pass
+        md.inlinePatterns.add('dw-videos', VideoPattern(VIDEO_RE, md), '>link')
         # md.inlinePatterns.add('dw-images', ImagePattern(IMAGE_RE, md), '>link')
         # md.postprocessors.add('dw-images-cleanup', ImagePostprocessor(md), '>raw_html')
 
@@ -36,6 +43,7 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
     """
 
     def handleMatch(self, m):
+        print("handling match")
         video = None
         video_id = None
         video_id = m.group("id").strip()
@@ -48,6 +56,7 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         except models.Image.DoesNotExist:
             pass
         caption = m.group("caption")
+        trailer = m.group('trailer')
         if not caption:
             caption_placeholder = "NO CAPTION"
         else:
@@ -59,6 +68,7 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
                 "caption": caption_placeholder,
             },
         )
+        return html
         print("html.split(caption_placeholder) is {}".format(
             html.split(caption_placeholder)
         ))
@@ -78,6 +88,6 @@ class VideoPostprocessor(markdown.postprocessors.Postprocessor):
         we wrap them in <figure>, we don't actually want it and have to
         remove it again after.
         """
-        text = text.replace("<p><figure", "<figure")
-        text = text.replace("</figure>\n</p>", "</figure>")
+        # text = text.replace("<p><figure", "<figure")
+        # text = text.replace("</figure>\n</p>", "</figure>")
         return text

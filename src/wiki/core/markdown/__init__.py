@@ -30,7 +30,9 @@ class ArticleMarkdown(markdown.Markdown):
 
     def convert(self, text, *args, **kwargs):
         html = super().convert(text, *args, **kwargs)
+        print("html is {}".format(html))
         if settings.MARKDOWN_SANITIZE_HTML:
+            print("here?")
             tags = settings.MARKDOWN_HTML_WHITELIST + plugin_registry.get_html_whitelist()
 
             attrs = dict()
@@ -47,5 +49,8 @@ class ArticleMarkdown(markdown.Markdown):
 
 
 def article_markdown(text, article, *args, **kwargs):
+    print("text is {}".format(
+        text
+    ))
     md = ArticleMarkdown(article, *args, **kwargs)
     return md.convert(text)
