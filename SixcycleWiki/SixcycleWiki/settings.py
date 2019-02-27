@@ -99,10 +99,7 @@ AUTHENTICATION_BACKENDS = [
     'SixcycleWiki.authentication_backend.MyBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-CORS_ORIGIN_WHITELIST = [
-    "sixcycle.com",
-    "localhost"
-]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 STATIC_ROOT = 'static'
