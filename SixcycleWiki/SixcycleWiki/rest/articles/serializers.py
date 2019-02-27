@@ -27,3 +27,6 @@ class ArticleSerializer(serializers.Serializer):
                 'name': obj.owner.displayName
             }
         return {}
+
+    def get_slug(self, obj):
+        return obj.get_absolute_url()
