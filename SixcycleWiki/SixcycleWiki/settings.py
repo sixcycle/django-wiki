@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sites.apps.SitesConfig',
     'django.contrib.humanize.apps.HumanizeConfig',
     'django_nyt.apps.DjangoNytConfig',
+    'corsheaders',
     'mptt',
     'sekizai',
     'sorl.thumbnail',
@@ -83,6 +84,8 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     # 'rest_framework.authentication.BasicAuthentication',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -96,6 +99,7 @@ AUTHENTICATION_BACKENDS = [
     'SixcycleWiki.authentication_backend.MyBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 STATIC_ROOT = 'static'
