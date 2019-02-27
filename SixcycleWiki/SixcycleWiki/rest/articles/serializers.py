@@ -12,7 +12,7 @@ class ArticleSerializer(serializers.Serializer):
         source='current_revision.content'
     )
     summary = serializers.CharField(
-        source='current_revision.summary'
+        source='current_revision.user_message'
     )
     owner = serializers.SerializerMethodField()
     created = serializers.DateTimeField()
@@ -24,7 +24,7 @@ class ArticleSerializer(serializers.Serializer):
             return {
                 'email': obj.owner.email,
                 'profile_picture_url': obj.owner.profile_picture_url,
-                'name': obj.owner.displayName
+                'name': obj.owner.name
             }
         return {}
 
