@@ -11,14 +11,19 @@ class ArticleSerializer(serializers.Serializer):
     content = serializers.CharField(
         source='current_revision.content'
     )
+    summary = serializers.CharField(
+        source='current_revision.summary'
+    )
     owner = serializers.SerializerMethodField()
     created = serializers.DateTimeField()
     modified = serializers.DateTimeField()
+    slug = serializers.SerializerMethodField()
 
     def get_owner(self, obj):
         if obj.owner:
             return {
                 'email': obj.owner.email,
-                'profile_picture_url': obj.owner.profile_picture_url
+                'profile_picture_url': obj.owner.profile_picture_url,
+                'name': obj.owner.displayName
             }
         return {}
