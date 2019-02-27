@@ -42,15 +42,14 @@ function add_image(form) {
 </style>
 <div style="max-height: 300px; overflow: auto;">
   <table class="table table-responsive table-bordered" id="image-list">
-    {% for image in images %}
-      {% with image.current_revision.imagerevision as revision %}
-      {% thumbnail revision.image "50x50" crop="center" as thumb %}
+    {% for video in videos %}
+      {% with video.current_revision.videorevision as revision %}
         <tr>
           <td style="white-space: nowrap;">
-            <p>{% trans "Image id" %}: {{ image.id }}</p>
+            <p>{% trans "Video id" %}: {{ video.id }}</p>
             <p>
               <a href="javascript:void(insert_image({{ image.id }}))"><span class="fa fa-edit"></span> {% trans "Insert" %}</a><br />
-              {% if image|can_write:user %}
+              {% if video|can_write:user %}
               <a href="{% url 'wiki:videos_add_revision' path=urlpath.path article_id=article.id image_id=image.id %}"><span class="fa fa-upload"></span> {% trans "Replace" %}</a>
               {% endif %}
             </p>

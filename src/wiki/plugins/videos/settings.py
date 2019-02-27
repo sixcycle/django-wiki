@@ -31,3 +31,5 @@ ANONYMOUS = getattr(
     django_settings,
     'WIKI_VIDEOS_ANONYMOUS',
     wiki_settings.ANONYMOUS_UPLOAD)
+
+MEDIA_URL = 'https://s3.amazonaws.com/sixcycle-wiki-storage/'

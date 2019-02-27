@@ -25,6 +25,7 @@ class VideoExtension(markdown.Extension):
 
     def extendMarkdown(self, md):
         md.inlinePatterns.add('dw-videos', VideoPattern(VIDEO_RE, md), '>link')
+        md.postprocessors.add('dw-videos-cleanup', VideoPostprocessor(md), '>raw_html')
 
 
 class VideoPattern(markdown.inlinepatterns.Pattern):
@@ -44,20 +45,15 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         video = None
         video_id = None
         video_id = m.group("id").strip()
-        video_url = models.VideoRevision.objects.filter(
-            plugin=video
-        ).get_filename()
-        print("video url is {}".format(
-            video_url
-        ))
         try:
-            image = models.Video.objects.get(
+            video = models.Video.objects.get(
                 article=self.markdown.article,
                 id=video_id,
                 current_revision__deleted=False,
             )
-        except models.Image.DoesNotExist:
+        except models.Video.DoesNotExist:
             pass
+        video_url = settings.MEDIA_URL + video.current_revision.videorevision.video.name
         caption = m.group("caption")
         trailer = m.group('trailer')
         if not caption:
@@ -72,10 +68,11 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
                 "video_url": video_url
             },
         )
-        html_before, html_after = html.split(caption_placeholder)
-        placeholder_before = self.markdown.htmlStash.store(html_before)
-        placeholder_after = self.markdown.htmlStash.store(html_after)
-        return placeholder_before + caption + placeholder_after + trailer
+        return self.markdown.htmlStash.store(html)
+        # html_before, html_after = html.split(caption_placeholder)
+        # placeholder_before = self.markdown.htmlStash.store(html_before)
+        # placeholder_after = self.markdown.htmlStash.store(html_after)
+        # return placeholder_before + caption + placeholder_after + trailer
 
 
 class VideoPostprocessor(markdown.postprocessors.Postprocessor):
@@ -88,6 +85,6 @@ class VideoPostprocessor(markdown.postprocessors.Postprocessor):
         we wrap them in <figure>, we don't actually want it and have to
         remove it again after.
         """
-        # text = text.replace("<p><figure", "<figure")
-        # text = text.replace("</figure>\n</p>", "</figure>")
+        text = text.replace("<p>\n<video", "<video")
+        text = text.replace("</video>\n</p>", "</video>")
         return text
