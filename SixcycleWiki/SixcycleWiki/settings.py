@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'sixcycle-wiki-env.7dwtp34aiu.us-east-1.elasticbeanstalk.com',
     'wiki-stg.sixcycle.com',
+    'dev2.sixcycle.com',
     '127.0.0.1'
     ]
 SITE_ID = 1
