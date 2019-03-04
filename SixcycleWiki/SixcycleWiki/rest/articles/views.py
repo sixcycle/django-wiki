@@ -7,6 +7,7 @@ from rest_framework.mixins import (
     CreateModelMixin,
     RetrieveModelMixin
 )
+from rest_framework import filters
 from .serializers import ArticleSerializer
 
 
@@ -14,6 +15,8 @@ class ArticleListView(GenericAPIView, ListModelMixin):
 
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    filter_backends = (filters.SearchFilter, )
+    search_fields = ('owner__name', 'current_revision__title')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
