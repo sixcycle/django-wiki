@@ -102,6 +102,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ORIGIN_WHITELIST = (
+    '*',
+    'dev2.sixcycle.com',
+    'app.sixcycle.com',
+    'localhost'
+    )
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
