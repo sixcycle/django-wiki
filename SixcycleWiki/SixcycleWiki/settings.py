@@ -110,7 +110,7 @@ CORS_ALLOW_METHODS = default_methods + (
     '',
 )
 CORS_ALLOW_HEADERS = default_headers + (
-    '',
+    'Vary',
 )
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
