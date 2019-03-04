@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from corsheaders.defaults import default_methods, default_headers
+from boto.s3.connection import SubdomainCallingFormat
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,7 +25,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2kj%%^khue249%e_*$q$^n+0s$mso$q3+(jf@n&*8wl9ffv+^j'
 AWS_ACCESS_KEY_ID = 'AKIAII3MV3YTNHV2RPPA'
 AWS_SECRET_ACCESS_KEY = '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'
-from boto.s3.connection import SubdomainCallingFormat
 AWS_CALLING_FORMAT = SubdomainCallingFormat
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -103,6 +105,12 @@ AUTHENTICATION_BACKENDS = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_REPLACE_HTTPS_REFERER = True
+CORS_ALLOW_METHODS = default_methods + (
+    '',
+)
+CORS_ALLOW_HEADERS = default_headers + (
+    'my-custom-header',
+)
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -181,7 +189,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
