@@ -103,7 +103,6 @@ AUTHENTICATION_BACKENDS = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-STATIC_ROOT = 'static'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
@@ -186,7 +185,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
-
+STATIC_ROOT = 'static'
 # Adding these settings for application to work in HTTPS
 ENVIRONMENT = os.environ.get('environment', None)
 if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
@@ -195,6 +194,7 @@ if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     CSRF_COOKIE_SECURE = True
     if ENVIRONMENT == "staging":
         STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
+        STATIC_ROOT = 'https://wiki-stg.sixcycle.com/static/'
 
 
 WIKI_MARKDOWN_HTML_WHITELIST = [
