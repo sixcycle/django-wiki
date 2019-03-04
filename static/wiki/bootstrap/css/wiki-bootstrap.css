@@ -7456,7 +7456,7 @@ textarea.form-vertical .wiki-control textarea {
 @font-face {
   font-family: 'FontAwesome';
   src: url('../../font-awesome/font/fontawesome-webfont.eot?v=4.2.0');
-  src: url('../../font-awesome/font/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../../font-awesome/font/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../../font-awesome/font/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../../font-awesome/font/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+  src: url('https://wiki-stg.sixcycle.com/static/wiki/font-awesome/font/fontawesome-webfont.woff') format('embedded-opentype'), url('https://wiki-stg.sixcycle.com/static/wiki/font-awesome/font/fontawesome-webfont.woff') format('woff'), url('https://wiki-stg.sixcycle.com/static/wiki/font-awesome/font/fontawesome-webfont.woff') format('truetype'), url('https://wiki-stg.sixcycle.com/static/wiki/font-awesome/font/fontawesome-webfont.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
