@@ -102,13 +102,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ORIGIN_WHITELIST = (
-    '*',
-    'dev2.sixcycle.com',
-    'app.sixcycle.com',
-    'localhost'
-    )
+CORS_ALLOW_CREDENTIALS = True
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
