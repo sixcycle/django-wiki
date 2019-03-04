@@ -34,7 +34,8 @@ ALLOWED_HOSTS = [
     'sixcycle-wiki-env.7dwtp34aiu.us-east-1.elasticbeanstalk.com',
     'wiki-stg.sixcycle.com',
     'dev2.sixcycle.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost'
     ]
 SITE_ID = 1
 # WIKI_ACCOUNT_HANDLING = False
