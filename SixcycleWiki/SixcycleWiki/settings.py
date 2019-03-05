@@ -199,7 +199,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
-    "/SixcycleWiki/lib/wiki/src/static/"
+    "SixcycleWiki/wiki/static/"
 ]
 # Adding these settings for application to work in HTTPS
 ENVIRONMENT = os.environ.get('environment', None)
