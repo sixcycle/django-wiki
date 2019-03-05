@@ -206,9 +206,6 @@ if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     CSRF_COOKIE_SECURE = True
     if ENVIRONMENT == "staging":
         STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
-        STATICFILES_DIRS = (
-            os.path.join(BASE_DIR, 'static'),
-        )
 
 
 WIKI_MARKDOWN_HTML_WHITELIST = [
