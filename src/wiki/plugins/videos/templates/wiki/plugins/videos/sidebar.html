@@ -12,18 +12,8 @@ function insert_video(data) {
         });
         $("#img_modal").modal();
    } else {
-        align = data.img_align.options[data.img_align.selectedIndex].text;
-        size = data.img_size.options[data.img_size.selectedIndex].text;
-        caption = data.img_caption.value;
-
-        data.img_align.selectedIndex = 0;
-        data.img_size.selectedIndex = 0;
-        data.img_caption.value = "";
 
         tag = '\n[video:'+video_id;
-        if (align != "center") tag = tag + ' align:'+align;
-        if (size != "default") tag = tag + ' size:'+size;
-
         if (caption == '')
             $('#id_content').insertAtCaret(tag+']\n\n');
         else
