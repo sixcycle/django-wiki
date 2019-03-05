@@ -205,8 +205,8 @@ if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     if ENVIRONMENT == "staging":
-        STATIC_ROOT = "https://wiki-stg.sixcycle.com/"
-        STATIC_ROOT = "https://wiki-stg.sixcycle.com/" + os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
+        STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
+        STATIC_ROOT = 'https://wiki-stg.sixcycle.com/static/'
 
 
 WIKI_MARKDOWN_HTML_WHITELIST = [
