@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'sf-regular';
+	src: url('../fonts/SFUIText-Regular.woff') format('woff'), url('../fonts/SFUIText-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'sf-regular' !important;
+}
+
 #article-container .pull-right a{
 	color: #ababab;
 }
