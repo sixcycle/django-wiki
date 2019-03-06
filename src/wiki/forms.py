@@ -236,7 +236,8 @@ class EditForm(forms.Form, SpamProtectionMixin):
         if current_revision:
             initial = {'content': current_revision.content,
                        'title': current_revision.title,
-                       'current_revision': current_revision.id}
+                       'current_revision': current_revision.id,
+                       'summary': current_revision.user_message}
             initial.update(kwargs.get('initial', {}))
 
             # Manipulate any data put in args[0] such that the current_revision
@@ -262,13 +263,13 @@ class EditForm(forms.Form, SpamProtectionMixin):
                             'content',
                             ""))
                     newdata['title'] = current_revision.title
+                    newdata['summary'] = current_revision.summary
                     kwargs['data'] = newdata
                 else:
                     # Always pass as kwarg
                     kwargs['data'] = data
 
             kwargs['initial'] = initial
-
         super().__init__(*args, **kwargs)
 
     def clean_title(self):
@@ -291,7 +292,8 @@ class EditForm(forms.Form, SpamProtectionMixin):
                 gettext(
                     'While you were editing, someone else changed the revision. Your contents have been automatically merged with the new contents. Please review the text below.'))
         if ('title' in cd) and cd['title'] == self.initial_revision.title and cd[
-                'content'] == self.initial_revision.content:
+                'content'] == self.initial_revision.content and cd[
+                    'summary'] == self.initial_revision.user_message:
             raise forms.ValidationError(gettext('No changes made. Nothing to save.'))
         self.check_spam()
         return cd
