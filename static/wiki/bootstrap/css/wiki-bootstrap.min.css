@@ -1,3 +1,7 @@
+html {
+	font-family: 'sf-regular' !important;
+}
+
 #article-container .pull-right a{
 	color: #ababab;
 }
