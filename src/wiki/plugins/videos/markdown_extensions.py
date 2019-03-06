@@ -57,9 +57,9 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         caption = m.group("caption")
         trailer = m.group('trailer')
         if not caption:
-            caption_placeholder = "NO CAPTION"
+            caption_placeholder = None
         else:
-            caption_placeholder
+            caption_placeholder = caption
         html = render_to_string(
             "wiki/plugins/videos/render.html",
             context={
