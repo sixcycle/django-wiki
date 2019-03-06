@@ -198,6 +198,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+STATICFILES_DIRS = [
+    "SixcycleWiki/wiki/static/"
+]
 # Adding these settings for application to work in HTTPS
 ENVIRONMENT = os.environ.get('environment', None)
 if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
