@@ -93,6 +93,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'SixcycleWiki.middleware.LoginFromCookieMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -100,6 +101,7 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
+    'SixcycleWiki.authentication_backend.TokenFromQueryParameterBackend',
     'SixcycleWiki.authentication_backend.MyBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
