@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sites.apps.SitesConfig',
     'django.contrib.humanize.apps.HumanizeConfig',
     'django_nyt.apps.DjangoNytConfig',
-    'corsheaders',
+    # 'corsheaders',
     'mptt',
     'sekizai',
     'sorl.thumbnail',
