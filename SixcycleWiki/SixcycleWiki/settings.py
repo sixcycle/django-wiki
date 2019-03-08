@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sites.apps.SitesConfig',
     'django.contrib.humanize.apps.HumanizeConfig',
     'django_nyt.apps.DjangoNytConfig',
-    # 'corsheaders',
+    'corsheaders',
     'mptt',
     'sekizai',
     'sorl.thumbnail',
@@ -89,7 +89,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     # 'rest_framework.authentication.BasicAuthentication',
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
