@@ -43,6 +43,26 @@ LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
+MIDDLEWARE = []
+
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+STATICFILES_DIRS = [
+    "SixcycleWiki/wiki/static/"
+]
+# Adding these settings for application to work in HTTPS
+ENVIRONMENT = os.environ.get('environment', None)
+if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    if ENVIRONMENT == "staging":
+        STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
+else:
+    MIDDLEWARE += [
+        'corsheaders.middleware.CorsMiddleware',
+    ]
+
 INSTALLED_APPS = [
     'authtools',
     'rest_framework',
@@ -87,9 +107,8 @@ REST_FRAMEWORK = {
     )
 }
 
-MIDDLEWARE = [
+MIDDLEWARE += [
     # 'rest_framework.authentication.BasicAuthentication',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -198,20 +217,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = 'static'
-STATICFILES_DIRS = [
-    "SixcycleWiki/wiki/static/"
-]
-# Adding these settings for application to work in HTTPS
-ENVIRONMENT = os.environ.get('environment', None)
-if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    if ENVIRONMENT == "staging":
-        STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
-        STATIC_ROOT = 'https://wiki-stg.sixcycle.com/static/'
 
 
 WIKI_MARKDOWN_HTML_WHITELIST = [
