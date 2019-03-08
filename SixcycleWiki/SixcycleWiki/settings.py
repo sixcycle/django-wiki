@@ -209,8 +209,8 @@ if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    # if ENVIRONMENT == "staging":
-    #     STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
+    if ENVIRONMENT == "staging":
+        STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
     #     STATIC_ROOT = 'https://wiki-stg.sixcycle.com/static/'
 
 
