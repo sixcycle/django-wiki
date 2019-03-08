@@ -1,15 +1,13 @@
-<video id='video-player' class="video-js" data-setup='{}''>
-    <source src="{{video_url}}" type="video/mp4">
-  </video>
-<script>
-  var player = videojs('video-player');
+<video id='video-player'class="video-js" data-setup='{}''></video>
+<script id='videoScript'>
+  var playerDOM = document.getElementsByClassName('video-js');
+  var player = videojs('video-player', {'controls': true});
   player.src(
     {
       src: '{{video_url}}',
       type: "video/mp4"
     }
   )
-  player.play();
 </script>
 {% if caption %}
 <p>{{caption}}</p>
