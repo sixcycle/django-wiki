@@ -89,7 +89,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     # 'rest_framework.authentication.BasicAuthentication',
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -211,7 +211,7 @@ if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     CSRF_COOKIE_SECURE = True
     if ENVIRONMENT == "staging":
         STATIC_URL = 'https://wiki-stg.sixcycle.com/static/'
-        STATIC_ROOT = 'https://wiki-stg.sixcycle.com/static/'
+    #     STATIC_ROOT = 'https://wiki-stg.sixcycle.com/static/'
 
 
 WIKI_MARKDOWN_HTML_WHITELIST = [
