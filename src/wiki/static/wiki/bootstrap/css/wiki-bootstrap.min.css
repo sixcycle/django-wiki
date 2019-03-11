@@ -9,6 +9,16 @@ body {
 	font-family: 'sf-regular' !important;
 }
 
+#article-menu {
+	display: flex;
+	flex-direction: column;
+}
+
+#article-owner-contents {
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
 #article-container .pull-right a{
 	color: #ababab;
 }
@@ -20,6 +30,8 @@ body {
 
 #rightButtonGroup {
 	list-style-type: none;
+	display: inline-block;
+	margin-left: 10px;
 }
 
 #rightButtonGroup .pull-right a {
@@ -30,15 +42,8 @@ body {
 	color: #ababab;
 }
 
-#rightButtonGroup .pull-right.active a {
-	background-color: #ababab;
-	color: white;
-}
-
-@media (max-width: 991px) {
-	.hidden-xs {
-		display: none !important;
-	}
+#rightButtonGroup .dropdown-menu .btn-dropdown.active {
+	background-color: gainsboro;
 }
 
 /*#article-container .wiki-article a {
