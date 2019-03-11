@@ -15,27 +15,29 @@
       <li class="pull-left" id="article-title-li">
         <h1 id="article-title">
           {{ article.current_revision.title }}
-          <small style="font-size: 14px;">
-            {% if urlpath.parent %}
-            <a href="{% url 'wiki:get' path=urlpath.path %}"><span class="fa fa-bookmark"></span> {{ urlpath.slug }}</a>
-            {% endif %}
-            {% if article.current_revision.locked %}
-              <span class="fa fa-lock"></span> {% trans "locked" %}
-            {% endif %}
-          </small>
+          <!--
+            <small style="font-size: 14px;">
+              {% if urlpath.parent %}
+              <a href="{% url 'wiki:get' path=urlpath.path %}"><span class="fa fa-bookmark"></span> {{ urlpath.slug }}</a>
+              {% endif %}
+              {% if article.current_revision.locked %}
+                <span class="fa fa-lock"></span> {% trans "locked" %}
+              {% endif %}
+            </small>
+          -->
         </h1>
       </li>
+      {% if article.owner %}
+        <div id="article-owner-contents">
+            <img src={{article.owner.profile_picture_url}} style="width:20px; height:20px">
+            <small style="font-size: 14px;">
+                {{article.owner.name}}
+            </small>
+        </div>
+      {% endif %}
       <!-- {% include "wiki/includes/article_menu.html" %} -->
       
     </ul>
-    {% if article.owner %}
-      <div id="article-owner-contents">
-          <img src={{article.owner.profile_picture_url}} style="width:20px; height:20px">
-          <small style="font-size: 14px;">
-              {{article.owner.name}}
-          </small>
-      </div>
-    {% endif %}
     <div>
       {% block wiki_contents_tab %}
       {% endblock %}
