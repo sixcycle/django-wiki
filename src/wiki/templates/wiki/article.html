@@ -28,12 +28,14 @@
       <!-- {% include "wiki/includes/article_menu.html" %} -->
       
     </ul>
-    <div id="article-owner-contents">
-        <img src={{article.owner.profile_picture_url}} style="width:20px; height:20px">
-        <small style="font-size: 14px;">
-            {{article.owner.name}}
-        </small>
-    </div>
+    {% if article.owner %}
+      <div id="article-owner-contents">
+          <img src={{article.owner.profile_picture_url}} style="width:20px; height:20px">
+          <small style="font-size: 14px;">
+              {{article.owner.name}}
+          </small>
+      </div>
+    {% endif %}
     <div>
       {% block wiki_contents_tab %}
       {% endblock %}
