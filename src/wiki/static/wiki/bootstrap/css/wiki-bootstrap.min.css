@@ -18,6 +18,29 @@ body {
 	color: white;
 }
 
+#rightButtonGroup {
+	list-style-type: none;
+}
+
+#rightButtonGroup .pull-right a {
+	position: relative;
+	display: block;
+	padding: 10px 15px;
+	border-radius: 4px;
+	color: #ababab;
+}
+
+#rightButtonGroup .pull-right.active a {
+	background-color: #ababab;
+	color: white;
+}
+
+@media (max-width: 991px) {
+	.hidden-xs {
+		display: none !important;
+	}
+}
+
 /*#article-container .wiki-article a {
 	color: #334b62;
 }

@@ -1,6 +1,10 @@
-<video id='video-player'class="video-js" data-setup='{}''></video>
+<video id='video-player' class="video-js" data-setup='{"width" : auto, "height" : auto }'></video>
 <script id='videoScript'>
-  var playerDOM = document.getElementsByClassName('video-js');
+  window.onload = function () {
+    var playerDOM = document.getElementById('video-player');
+    playerDOM.style.width='auto';
+    videojs(playerDOM).fluid(true);
+  };
   var player = videojs('video-player', {'controls': true});
   player.src(
     {
