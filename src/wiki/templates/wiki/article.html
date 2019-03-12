@@ -1,6 +1,6 @@
 {% extends "wiki/base.html" %}
 {% load wiki_tags i18n sekizai_tags %}
-
+{% load thumbor_tags %}
 
 {% block wiki_pagetitle %}{{ article.current_revision.title }}{% endblock %}
 
@@ -29,7 +29,7 @@
       </li>
       {% if article.owner %}
         <div id="article-owner-contents">
-            <img src={{article.owner.profile_picture_url}} style="width:20px; height:20px">
+            <img src="{% thumbor_url article.owner.profile_picture_url width=35 height=35%}" width="35" height="35" style="border-radius: 2px;">
             <small style="font-size: 14px;">
                 {{article.owner.name}}
             </small>
