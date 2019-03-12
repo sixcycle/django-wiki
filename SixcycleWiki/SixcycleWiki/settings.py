@@ -93,6 +93,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
+    'django_thumbor',
 ]
 
 REST_FRAMEWORK = {
@@ -215,9 +216,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+# The host serving the thumbor resized images
+THUMBOR_SERVER = 'https://imgs.sixcycle.com'
 
+THUMBOR_SECURITY_KEY = '6f0fa38c-75f1-11e6-9493-6476bab407e8'
 
 WIKI_MARKDOWN_HTML_WHITELIST = [
     "script",
