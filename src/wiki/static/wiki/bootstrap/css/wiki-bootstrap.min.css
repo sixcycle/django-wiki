@@ -14,9 +14,17 @@ body {
 	flex-direction: column;
 }
 
+#article-title {
+	margin-bottom: 5px !important;
+}
+
 #article-owner-contents {
 	margin-bottom: 15px;
 	font-weight: bold;
+}
+
+#article-container {
+	margin-top: 0px !important;
 }
 
 #article-container .pull-right a{
@@ -34,6 +42,14 @@ body {
 	margin-left: 10px;
 }
 
+#rightButtonGroup .btn-group .btn{
+	width: 40px;
+}
+
+#rightButtonGroup .btn-group .btn .caret {
+	margin-left: -4px;
+}
+
 #rightButtonGroup .pull-right a {
 	position: relative;
 	display: block;
@@ -44,6 +60,13 @@ body {
 
 #rightButtonGroup .dropdown-menu .btn-dropdown.active {
 	background-color: gainsboro;
+}
+
+@media (max-width: 485px) {
+  #article-breadcrumbs {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /*#article-container .wiki-article a {
