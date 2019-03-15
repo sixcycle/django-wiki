@@ -109,7 +109,10 @@ def on_video_revision_delete(instance, *args, **kwargs):
     instance.video.delete(save=False)
 
     try:
-        path = instance.video.path.split("/")[:-1]
+        if instance.video:
+            path = instance.video.path.split("/")[:-1]
+        else:
+            return
     except NotImplementedError:
             # This backend storage doesn't implement 'path' so there is no
             # path to delete
