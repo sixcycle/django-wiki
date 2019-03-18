@@ -53,9 +53,7 @@ class ImagePattern(markdown.inlinepatterns.Pattern):
             size = settings.THUMBNAIL_SIZES[m.group("size")]
         try:
             image = models.Image.objects.get(
-                article=self.markdown.article,
                 id=image_id,
-                current_revision__deleted=False,
             )
         except models.Image.DoesNotExist:
             pass

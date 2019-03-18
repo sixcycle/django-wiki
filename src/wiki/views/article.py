@@ -50,6 +50,8 @@ class Create(FormView, ArticleMixin):
 
     @method_decorator(get_article(can_write=True, can_create=True))
     def dispatch(self, request, article, *args, **kwargs):
+        self.sidebar_plugins = plugin_registry.get_sidebar()
+        self.sidebar = []
         return super().dispatch(request, article, *args, **kwargs)
 
     def get_form(self, form_class=None):
@@ -106,6 +108,21 @@ class Create(FormView, ArticleMixin):
     def get_success_url(self):
         return redirect('wiki:get', self.newpath.path)
 
+    def get_sidebar_form_classes(self):
+        """Returns dictionary of form classes for the sidebar. If no form class is
+        specified, puts None in dictionary. Keys in the dictionary are used
+        to identify which form is being saved."""
+        form_classes = {}
+        for cnt, plugin in enumerate(self.sidebar_plugins):
+            form_classes[
+                'form%d' %
+                cnt] = (
+                plugin,
+                plugin.sidebar.get(
+                    'form_class',
+                    None))
+        return form_classes
+
     def get_context_data(self, **kwargs):
         c = ArticleMixin.get_context_data(self, **kwargs)
         # Needed since Django 1.9 because get_context_data is no longer called
@@ -116,8 +133,25 @@ class Create(FormView, ArticleMixin):
         c['parent_article'] = self.article
         c['create_form'] = c.pop('form', None)
         c['editor'] = editors.getEditor()
+        c['sidebar'] = self.sidebar
         return c
 
+    def get(self, request, *args, **kwargs):
+        # Generate sidebar forms
+        self.sidebar_forms = []
+        for form_id, (plugin, Form) in self.get_sidebar_form_classes().items():
+            if Form:
+                form = Form(self.article, self.request.user)
+                setattr(form, 'form_id', form_id)
+            else:
+                form = None
+            self.sidebar.append((plugin, form))
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        for form_id, (plugin, Form) in self.get_sidebar_form_classes().items():
+            if Form:
+                if form_id == self.request.GET.get('f', None):
 
 class Delete(FormView, ArticleMixin):
 

@@ -47,9 +47,7 @@ class VideoPattern(markdown.inlinepatterns.Pattern):
         video_id = m.group("id").strip()
         try:
             video = models.Video.objects.get(
-                article=self.markdown.article,
                 id=video_id,
-                current_revision__deleted=False,
             )
         except models.Video.DoesNotExist:
             pass
