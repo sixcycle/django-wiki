@@ -148,11 +148,6 @@ class Create(FormView, ArticleMixin):
             self.sidebar.append((plugin, form))
         return super().get(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        for form_id, (plugin, Form) in self.get_sidebar_form_classes().items():
-            if Form:
-                if form_id == self.request.GET.get('f', None):
-
 class Delete(FormView, ArticleMixin):
 
     form_class = forms.DeleteForm
