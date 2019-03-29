@@ -94,7 +94,8 @@ INSTALLED_APPS = [
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
     'django_thumbor',
-    'relationships'
+    'relationships',
+    'wikiextensions'
 ]
 
 REST_FRAMEWORK = {
@@ -124,7 +125,7 @@ MIDDLEWARE += [
 AUTHENTICATION_BACKENDS = [
     'SixcycleWiki.authentication_backend.TokenFromQueryParameterBackend',
     'SixcycleWiki.authentication_backend.MyBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -235,10 +236,18 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
 def WIKI_CAN_READ(article, user):
     if user.is_anonymous:
         return False
-    user_orgs = user.OrgUserRelationship.all().values_list(
-        'organization_id',
-        flat=True
-    )
-    return article.organizationarticle_set.filter(
-        organization_id__in=user_orgs
-    ).exists()
+    try:
+        if article.articletype.public:
+            return True
+        elif article.articletype.shared_to_group:
+            pass
+        elif article.articletype.shared_to_organization:
+            user_orgs = user.OrgUserRelationship.all().values_list(
+                'organization_id',
+                flat=True
+            )
+            return article.organizationarticle_set.filter(
+                organization_id__in=user_orgs
+            ).exists()
+    except:
+        return False
