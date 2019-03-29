@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
     'django_thumbor',
+    'relationships'
 ]
 
 REST_FRAMEWORK = {
@@ -229,3 +230,15 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
     "video-js",
     "link"
 ]
+
+
+def WIKI_CAN_READ(article, user):
+    if user.is_anonymous:
+        return False
+    user_orgs = user.OrgUserRelationship.all().values_list(
+        'organization_id',
+        flat=True
+    )
+    return article.organizationarticle_set.filter(
+        organization_id__in=user_orgs
+    ).exists()
