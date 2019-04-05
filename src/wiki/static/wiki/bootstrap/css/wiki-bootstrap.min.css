@@ -24,7 +24,7 @@ body {
 }
 
 #article-container {
-	margin-top: 0px !important;
+	margin-top: 20px !important;
 }
 
 #article-container .pull-right a{
@@ -77,6 +77,7 @@ body {
 
 .container.editPage {
 	width: 100% !important;
+	margin-top: 25px !important;
 }
 
 .container.editPage #article-menu,
@@ -162,11 +163,12 @@ body {
 }
 
 .container.editPage #div_id_content #id_content {
-    height: calc(100vh - 210px);
+    height: calc(100vh - 180px);
     margin: 10px 0px 5px;
     width: 100%;
     resize: none;
     margin-top: 0;
+    font-family: sf-regular;
 }
 
 .container.editPage #markItUpId_content .markItUpFooter {
@@ -175,16 +177,57 @@ body {
 
 .container.editPage .markItUpHeader {
 	position: absolute;
-    top: -94px;
+    top: -118px;
     left: 21px;
     border-bottom: 1px solid lightgray;
     padding-bottom: 2px;
     width: 100vw;
+    height: 40px;
+}
+
+.container.editPage .markItUpHeader ul {
+	padding-top: 12px;
+}
+
+.container.editPage .markItUpHeader ul li {
+	margin-right: 10px;
 }
 
 .container.editPage .col-lg-10{
 	width: 100% !important;
 }
+
+.navbar.editPage {
+	display: none;
+}
+
+.container.editPage #wiki-footer {
+	display: none;
+}
+
+.container.editPage .col-lg-offset-2 {
+	margin-left: 0px !important;
+	display: flex;
+}
+
+.container.editPage .col-lg-offset-2 .btn.btn-default {
+	order: 2;
+	margin-left: auto;
+	margin-right: 6px;
+}
+
+.container.editPage .col-lg-offset-2 .btn.btn-primary {
+	order: 3;
+}
+
+.container.editPage .col-lg-offset-2 .btn-toolbar.pull-right {
+	order: 1;
+}
+
+.container.editPage #article-container .pull-right a {
+	color: white;
+}
+
 
 
 /*#article-container .wiki-article a {
