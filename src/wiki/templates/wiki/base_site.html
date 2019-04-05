@@ -133,8 +133,10 @@
 
       <script language="javascript">
         var containerClass = document.getElementsByClassName('container')[1];
+        var navbarClass = document.getElementsByClassName('navbar')[0];
         if(window.location.href.indexOf("_edit") > -1) {
-           containerClass.classList.add('editPage')
+           containerClass.classList.add('editPage');
+           navbarClass.classList.add('editPage');
         }
       </script>
 
