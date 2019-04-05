@@ -7,6 +7,7 @@
 
 body {
 	font-family: 'sf-regular' !important;
+	overscroll-behavior: none;
 }
 
 #article-menu {
@@ -163,7 +164,7 @@ body {
 }
 
 .container.editPage #div_id_content #id_content {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 182px);
     margin: 10px 0px 5px;
     width: 100%;
     resize: none;
@@ -213,7 +214,7 @@ body {
 .container.editPage .col-lg-offset-2 .btn.btn-default {
 	order: 2;
 	margin-left: auto;
-	margin-right: 6px;
+	margin-right: 10px;
 }
 
 .container.editPage .col-lg-offset-2 .btn.btn-primary {
@@ -228,7 +229,11 @@ body {
 	color: white;
 }
 
-
+.container.editPage #id_cancel {
+	margin-right: 10px;
+	background-color: gray !important;
+	border-color: gray !important;
+}
 
 /*#article-container .wiki-article a {
 	color: #334b62;
