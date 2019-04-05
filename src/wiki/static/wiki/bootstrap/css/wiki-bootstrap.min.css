@@ -75,6 +75,118 @@ body {
   }
 }
 
+.container.editPage {
+	width: 100% !important;
+}
+
+.container.editPage #article-menu,
+.container.editPage #article-breadcrumbs{
+	display: none;
+}
+
+.container.editPage #article_edit_form {
+	display: flex;
+	flex-direction: column;
+}
+
+.container.editPage #div_id_title {
+	order: 1;
+}
+
+.container.editPage #div_id_title #id_title {
+	border-bottom: 0px;
+	border-radius: 0px;
+	border: none;
+	box-shadow: none;
+}
+
+.container.editPage #div_id_title .wiki-label {
+	display: none;
+}
+
+.container.editPage #div_id_content {
+	order: 3;
+	margin-bottom: 0px;
+}
+
+.container.editPage #id_content {
+	border-top: 0px;
+	box-shadow: none;
+	border-radius: 0px;
+	outline: none;
+	outline-style: none;
+	outline-width: 0;
+	border: none;
+}
+
+.container.editPage #div_id_content .wiki-label {
+	display: none;
+}
+
+.container.editPage #div_id_summary {
+	order: 2;
+	border-bottom: 0px;
+	border-radius: 0px;
+	box-shadow: none;
+	border-top: 0px;
+	border: none;
+}
+
+.container.editPage #id_summary {
+	border-bottom: 0px;
+	border-radius: 0px;
+	box-shadow: none;
+	border-top: 0px;
+	border: none;	
+}
+
+.container.editPage #div_id_summary .wiki-label {
+	display: none;
+}
+
+.container.editPage .form-actions {
+	order: 4;
+	margin-top: 0px;
+	padding: 5px;
+	width: 100vw;
+	border-top: 1px solid lightgray;
+	background-color: white;
+}
+
+.container.editPage .form-group {
+	margin-bottom: 0px !important;
+}
+
+.container.editPage #hint_id_summary{
+	display: none;
+}
+
+.container.editPage #div_id_content #id_content {
+    height: calc(100vh - 210px);
+    margin: 10px 0px 5px;
+    width: 100%;
+    resize: none;
+    margin-top: 0;
+}
+
+.container.editPage #markItUpId_content .markItUpFooter {
+	display: none;
+}
+
+.container.editPage .markItUpHeader {
+	position: absolute;
+    top: -94px;
+    left: 21px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 2px;
+    width: 100vw;
+}
+
+.container.editPage .col-lg-10{
+	width: 100% !important;
+}
+
+
 /*#article-container .wiki-article a {
 	color: #334b62;
 }

@@ -127,7 +127,16 @@
     </div>
     {% endblock %}
 
+
+
     <div class="container" style="margin-top: 75px;">
+
+      <script language="javascript">
+        var containerClass = document.getElementsByClassName('container')[1];
+        if(window.location.href.indexOf("_edit") > -1) {
+           containerClass.classList.add('editPage')
+        }
+      </script>
 
       {% wiki_messages %}
 
