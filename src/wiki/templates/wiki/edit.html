@@ -31,10 +31,16 @@
               <span class="fa fa-eye"></span>
               {% trans "Preview" %}
             </button>
+
+            <button class="btn btn-primary" type="submit" name="cancel" value="1" id="id_cancel">
+              {% trans "Cancel" %}
+            </button>
+            
             <button class="btn btn-primary" type="submit" name="save" value="1" id="id_save">
               <span class="fa fa-check"></span>
               {% trans "Save changes" %}
             </button>
+
 
             <div class="btn-toolbar pull-right">
               {% if user.is_authenticated and urlpath.path %}
@@ -88,6 +94,12 @@
 </div>
 
 {% addtoblock "js" %}
+<script language='javascript'>
+  var summaryInput = document.getElementById('id_summary');
+  var titleInput = document.getElementById('id_title');
+  summaryInput.setAttribute("autocomplete", "off");
+  titleInput.setAttribute("autocomplete", "off");
+</script>
 <script language="javascript">
   $(document).ready(function() {
     $("#article_edit_form :input").change(function() {
@@ -115,6 +127,12 @@
     $("#id_preview_save_changes").on("click", function (ev) {
         ev.preventDefault();
         $("#id_save").trigger("click");
+    });
+    $("#id_cancel").on("click", function (ev) {
+        ev.preventDefault();
+        var currentURL = window.location.href;
+        var newURL = currentURL.replace('_edit/', '');
+        window.location.href = newURL;
     });
   });
 

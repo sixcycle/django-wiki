@@ -7,6 +7,7 @@
 
 body {
 	font-family: 'sf-regular' !important;
+	overscroll-behavior: none;
 }
 
 #article-menu {
@@ -163,7 +164,7 @@ body {
 }
 
 .container.editPage #div_id_content #id_content {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 182px);
     margin: 10px 0px 5px;
     width: 100%;
     resize: none;
@@ -181,7 +182,7 @@ body {
     left: 21px;
     border-bottom: 1px solid lightgray;
     padding-bottom: 2px;
-    width: 100vw;
+    width: 98vw;
     height: 40px;
 }
 
@@ -213,7 +214,7 @@ body {
 .container.editPage .col-lg-offset-2 .btn.btn-default {
 	order: 2;
 	margin-left: auto;
-	margin-right: 6px;
+	margin-right: 10px;
 }
 
 .container.editPage .col-lg-offset-2 .btn.btn-primary {
@@ -228,7 +229,39 @@ body {
 	color: white;
 }
 
+.container.editPage #id_cancel {
+	margin-right: 10px;
+	background-color: gray !important;
+	border-color: gray !important;
+}
 
+.container.editPage #wiki-edit-sidebar {
+	margin-top: 12px;
+}
+
+@media (min-width: 1200px){
+	.col-lg-4{
+		width: 25% !important;
+	}
+	.col-lg-8{
+		width: 75% !important;
+	}
+}
+
+@media (max-width: 1200px) {
+	.container.editPage .row{
+		display: flex;
+		flex-direction: column;
+		margin-top: -40px;
+	}
+	.container.editPage .col-lg-8{
+		order: 2;
+		margin-top: 20px;
+	}
+	.container.editPage .col-lg-4{
+		order: 1;
+	}
+}
 
 /*#article-container .wiki-article a {
 	color: #334b62;
