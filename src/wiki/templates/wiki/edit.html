@@ -94,6 +94,12 @@
 </div>
 
 {% addtoblock "js" %}
+<script language='javascript'>
+  var summaryInput = document.getElementById('id_summary');
+  var titleInput = document.getElementById('id_title');
+  summaryInput.setAttribute("autocomplete", "off");
+  titleInput.setAttribute("autocomplete", "off");
+</script>
 <script language="javascript">
   $(document).ready(function() {
     $("#article_edit_form :input").change(function() {

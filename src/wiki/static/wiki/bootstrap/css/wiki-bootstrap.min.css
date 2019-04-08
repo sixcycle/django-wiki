@@ -182,7 +182,7 @@ body {
     left: 21px;
     border-bottom: 1px solid lightgray;
     padding-bottom: 2px;
-    width: 100vw;
+    width: 98vw;
     height: 40px;
 }
 
@@ -233,6 +233,34 @@ body {
 	margin-right: 10px;
 	background-color: gray !important;
 	border-color: gray !important;
+}
+
+.container.editPage #wiki-edit-sidebar {
+	margin-top: 12px;
+}
+
+@media (min-width: 1200px){
+	.col-lg-4{
+		width: 25% !important;
+	}
+	.col-lg-8{
+		width: 75% !important;
+	}
+}
+
+@media (max-width: 1200px) {
+	.container.editPage .row{
+		display: flex;
+		flex-direction: column;
+		margin-top: -40px;
+	}
+	.container.editPage .col-lg-8{
+		order: 2;
+		margin-top: 20px;
+	}
+	.container.editPage .col-lg-4{
+		order: 1;
+	}
 }
 
 /*#article-container .wiki-article a {
