@@ -99,6 +99,12 @@
   var titleInput = document.getElementById('id_title');
   summaryInput.setAttribute("autocomplete", "off");
   titleInput.setAttribute("autocomplete", "off");
+  var paraDiv = document.createElement("div");
+  paraDiv.setAttribute("id", "summaryText");
+  var summaryText = document.createTextNode("Summary");
+  paraDiv.appendChild(summaryText);
+  var element = document.getElementById("div_id_summary");
+  element.appendChild(paraDiv);
 </script>
 <script language="javascript">
   $(document).ready(function() {
