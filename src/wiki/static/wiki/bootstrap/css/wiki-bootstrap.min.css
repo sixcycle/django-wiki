@@ -283,7 +283,13 @@ body {
 		order: 1;
 	}
 	.container.editPage #div_id_content #id_content {
-    	height: calc(100vh - 331px);
+    	height: calc(100vh - 326px);
+	}
+	.container.editPage #id_summary{
+		width: 100% !important;
+	}
+	.container.editPage #wiki-edit-sidebar {
+		margin-top: 7px;
 	}
 }
 
