@@ -95,6 +95,10 @@ body {
 	order: 1;
 }
 
+.container.editPage #id_title {
+	padding-bottom: 12px;
+}
+
 .container.editPage #div_id_title #id_title {
 	border-bottom: 0px;
 	border-radius: 0px;
@@ -137,9 +141,10 @@ body {
 
 .container.editPage #div_id_summary #summaryText {
 	position: absolute;
-	font-size: 10px;
-	left: 22px;
+	font-size: 9px;
+	left: 27px;
 	color: gray;
+	top: 47px;
 }
 
 .container.editPage #id_summary {
@@ -149,7 +154,9 @@ body {
 	border-top: 0px;
 	border: none;	
 	background-color: #f5f5f5;
-	padding-top: 18px;
+	height: 45px;
+	padding-top: 17px;
+	padding-left: 10px;
 }
 
 .container.editPage #div_id_summary .wiki-label {
@@ -174,7 +181,7 @@ body {
 }
 
 .container.editPage #div_id_content #id_content {
-    height: calc(100vh - 182px);
+    height: calc(100vh - 192px);
     margin: 10px 0px 5px;
     width: 100%;
     resize: none;
@@ -188,7 +195,7 @@ body {
 
 .container.editPage .markItUpHeader {
 	position: absolute;
-    top: -118px;
+    top: -130px;
     left: 0px;
     border-bottom: 1px solid lightgray;
     padding-bottom: 2px;
@@ -276,7 +283,7 @@ body {
 		order: 1;
 	}
 	.container.editPage #div_id_content #id_content {
-    	height: calc(100vh - 321px);
+    	height: calc(100vh - 331px);
 	}
 }
 
