@@ -94,12 +94,9 @@ INSTALLED_APPS = [
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
     'django_thumbor',
-<<<<<<< HEAD
     'dashboard'
-=======
     'relationships',
     'wikiextensions'
->>>>>>> a53632cc986706b807b686822cd7a0dcbf9b57b0
 ]
 
 REST_FRAMEWORK = {
