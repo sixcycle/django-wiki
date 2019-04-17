@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
     'django_thumbor',
+    'dashboard'
 ]
 
 REST_FRAMEWORK = {
@@ -229,3 +230,7 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
     "video-js",
     "link"
 ]
+
+
+def WIKI_CAN_READ(article, user):
+    return True
