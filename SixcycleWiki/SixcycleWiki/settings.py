@@ -94,7 +94,7 @@ INSTALLED_APPS = [
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
     'django_thumbor',
-    'dashboard'
+    'dashboard',
     'relationships',
     'wikiextensions'
 ]
