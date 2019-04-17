@@ -3,3 +3,19 @@
 <a href="{{owned_article.get_absolute_url}}">{{owned_article}}</a>
 <br>
 {% endfor %}
+
+<h1>Organization Articles</h1>
+{% for org_article in org_articles %}
+<a href="{{org_article.get_absolute_url}}">{{org_article}}</a>
+<br>
+{% endfor %}
+
+
+<h1>Shared with Me</h1>
+{% for shared_article in shared_articles %}
+<a href="{{shared_article.get_absolute_url}}">{{shared_article}}</a>
+<br>
+{% endfor %}
+
+
+
