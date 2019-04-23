@@ -674,25 +674,40 @@ class SearchView(ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        if not self.query:
-            return models.Article.objects.none().order_by('-current_revision__created')
-        articles = models.Article.objects
-        path = self.kwargs.get('path', None)
-        if path:
-            try:
-                self.urlpath = models.URLPath.get_by_path(path)
-                article_ids = self.urlpath.get_descendants(
-                    include_self=True).values_list('article_id')
-                articles = articles.filter(id__in=article_ids)
-            except (NoRootURL, models.URLPath.DoesNotExist):
-                raise Http404
-        articles = articles.filter(
-            Q(current_revision__title__icontains=self.query) |
-            Q(current_revision__content__icontains=self.query))
-        if not permissions.can_moderate(
-                models.URLPath.root().article,
-                self.request.user):
-            articles = articles.active().can_read(self.request.user)
+        if self.request.user.is_anonymous:
+            return models.Article.objects.none()
+        user = self.request.user
+        user_groups = user.GroupMemberRelation.all().values_list(
+            'group__id',
+            flat=True
+        )
+        user_orgs = user.OrgUserRelationship.all().values_list(
+                'organization_id',
+                flat=True
+        )
+        articles = models.Article.objects.filter(
+            Q(
+                organizationeditarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                organizationreadarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                groupeditarticle__group_id__in=user_groups
+            ) |
+            Q(
+                groupreadarticle__group_id__in=user_groups
+            ) |
+            Q(
+                usereditarticle__user=user
+            ) |
+            Q(
+                userreadarticle__user=user
+            ) |
+            Q(
+                owner=user
+            )
+        )
         return articles.order_by('-current_revision__created')
 
     def get_context_data(self, **kwargs):
