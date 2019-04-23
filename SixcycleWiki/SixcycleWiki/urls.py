@@ -30,7 +30,6 @@ from SixcycleWiki.rest.articles.views import (
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^dashboard/', DashboardView.as_view()),
     url(r'^myarticles/', my_article_view),
     url(r'^create_org_root/', create_org_root_view)
 ]
@@ -38,9 +37,10 @@ urlpatterns += [
     url(r'^api/articles/(?P<pk>\d+)/$',
         ArticleDetailView.as_view()),
     url(r'^api/articles/', ArticleListView.as_view()),
-    url(r'^api/share_article', ShareView.as_view())
+    url(r'^api/share_article/', ShareView.as_view())
 ]
 urlpatterns += [
     url(r'^notifications/', get_nyt_pattern()),
-    url(r'', get_wiki_pattern())
+    url(r'^wiki/', include('wiki.urls')),
+    url(r'', DashboardView.as_view()),
 ]

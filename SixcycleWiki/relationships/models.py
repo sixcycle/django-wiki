@@ -24,7 +24,6 @@ class OrganizationReadArticle(BaseArticleRelationship):
 class OrganizationEditArticle(BaseArticleRelationship):
 
     organization = models.ForeignKey(Organization)
-    user = models.ForeignKey(User)
 
 
 class GroupReadArticle(BaseArticleRelationship):

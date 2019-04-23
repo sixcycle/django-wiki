@@ -20,6 +20,7 @@ class DashboardView(TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        print("here")
         # GET AVAILABLE SLUGS
         user = kwargs.get("user", None)
 
