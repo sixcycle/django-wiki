@@ -22,6 +22,7 @@ from dashboard.views import (
     my_article_view,
     create_org_root_view
 )
+from SixcycleWiki.rest.sharing.views import ShareView
 from SixcycleWiki.rest.articles.views import (
     ArticleListView,
     ArticleDetailView
@@ -37,6 +38,7 @@ urlpatterns += [
     url(r'^api/articles/(?P<pk>\d+)/$',
         ArticleDetailView.as_view()),
     url(r'^api/articles/', ArticleListView.as_view()),
+    url(r'^api/share_article', ShareView.as_view())
 ]
 urlpatterns += [
     url(r'^notifications/', get_nyt_pattern()),

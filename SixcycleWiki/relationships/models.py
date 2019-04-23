@@ -16,16 +16,32 @@ class BaseArticleRelationship(models.Model):
         abstract = True
 
 
-class UsersArticle(BaseArticleRelationship):
-
-    user = models.ForeignKey(User)
-
-
-class OrganizationArticle(BaseArticleRelationship):
+class OrganizationReadArticle(BaseArticleRelationship):
 
     organization = models.ForeignKey(Organization)
 
 
-class GroupsArticle(BaseArticleRelationship):
+class OrganizationEditArticle(BaseArticleRelationship):
+
+    organization = models.ForeignKey(Organization)
+    user = models.ForeignKey(User)
+
+
+class GroupReadArticle(BaseArticleRelationship):
 
     group = models.ForeignKey(Group)
+
+
+class GroupEditArticle(BaseArticleRelationship):
+
+    group = models.ForeignKey(Group)
+
+
+class UserReadArticle(BaseArticleRelationship):
+
+    user = models.ForeignKey(User)
+
+
+class UserEditArticle(BaseArticleRelationship):
+
+    user = models.ForeignKey(User)

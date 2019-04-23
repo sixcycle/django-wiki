@@ -5,7 +5,8 @@ from django.shortcuts import redirect
 from django.http import HttpResponseForbidden
 from SixcycleWiki.authentication.models import Organization
 from dashboard.models import OrganizationAdmins
-from relationships.models import OrganizationArticle
+from relationships.models import *
+from django.db.models import Q
 from .values import CONTENT_PLACEHOLDER_USER_WIKI
 # Create your views here.
 
@@ -21,6 +22,7 @@ class DashboardView(TemplateView):
     def get_context_data(self, **kwargs):
         # GET AVAILABLE SLUGS
         user = kwargs.get("user", None)
+
         if Article.objects.filter(owner=user, is_root=True).exists():
             kwargs["my_articles"] = Article.objects.filter(
                 owner=user,
@@ -28,19 +30,49 @@ class DashboardView(TemplateView):
             ).first().get_absolute_url()
         else:
             kwargs["my_articles"] = "/myarticles"
+
         kwargs["owned_articles"] = Article.objects.filter(
             owner=user,
             is_root=False
         )
+
         user_orgs = user.OrgUserRelationship.all().values_list(
                 'organization_id',
                 flat=True
             )
         kwargs["org_articles"] = Article.objects.filter(
-             organizationarticle__organization__id__in=user_orgs
+            Q(
+                organizationeditarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                organizationreadarticle__organization__id__in=user_orgs
+            )
          )
+
+        user_groups = user.GroupMemberRelation.all().values_list(
+            'group__id',
+            flat=True
+        )
+
         kwargs["shared_articles"] = Article.objects.filter(
-            usersarticle__user=user
+            Q(
+                organizationeditarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                organizationreadarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                groupeditarticle__group_id__in=user_groups
+            ) |
+            Q(
+                groupreadarticle__group_id__in=user_groups
+            ) |
+            Q(
+                usereditarticle__user=user
+            ) |
+            Q(
+                userreadarticle__user=user
+            )
         )
         return kwargs
 
