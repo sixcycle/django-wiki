@@ -26,6 +26,12 @@ class Organization(models.Model):
         db_table = 'profiles_organization'
         app_label = 'authentication'
 
+    def __str__(self):
+        return "{}-{}".format(
+            self.name,
+            self.id
+        )
+
 
 class OrgUserRelationship(models.Model):
     user = models.ForeignKey(User, related_name='OrgUserRelationship')
@@ -37,4 +43,21 @@ class OrgUserRelationship(models.Model):
 
     class Meta:
         db_table = 'profiles_orguserrelationship'
+        app_label = 'authentication'
+
+
+class Group(models.Model):
+    name = models.CharField('name', max_length=255, blank=True)
+
+    class Meta:
+        db_table = 'profiles_group'
+        app_label = 'authentication'
+
+
+class GroupMemberRelation(models.Model):
+    user = models.ForeignKey(User, related_name='GroupMemberRelation')
+    group = models.ForeignKey(Group, related_name='GroupMemberRelation')
+
+    class Meta:
+        db_table = 'profiles_groupmemberrelation'
         app_label = 'authentication'

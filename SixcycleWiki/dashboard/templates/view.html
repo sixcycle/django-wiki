@@ -1,4 +1,5 @@
-<h1>My Articles</h1>
+<a href="{{my_articles}}">My Articles</a>
+<br>
 {% for owned_article in owned_articles %}
 <a href="{{owned_article.get_absolute_url}}">{{owned_article}}</a>
 <br>

@@ -1,7 +1,8 @@
 from django.db import models
 from SixcycleWiki.authentication.models import (
     User,
-    Organization
+    Organization,
+    Group
 )
 from wiki.models.article import Article
 # Create your models here.
@@ -23,3 +24,8 @@ class UsersArticle(BaseArticleRelationship):
 class OrganizationArticle(BaseArticleRelationship):
 
     organization = models.ForeignKey(Organization)
+
+
+class GroupsArticle(BaseArticleRelationship):
+
+    group = models.ForeignKey(Group)

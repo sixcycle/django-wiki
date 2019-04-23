@@ -238,17 +238,36 @@ def WIKI_CAN_READ(article, user):
     if user.is_anonymous:
         return False
     try:
-        if article.articletype.public:
+        if article.owner == user:
             return True
-        elif article.articletype.shared_to_group:
-            pass
-        elif article.articletype.shared_to_organization:
-            user_orgs = user.OrgUserRelationship.all().values_list(
-                'organization_id',
-                flat=True
-            )
-            return article.organizationarticle_set.filter(
-                organization_id__in=user_orgs
-            ).exists()
-    except:
+        elif article.usersarticle_set.filter(user=user).exists():
+            # Check for direct sharing access to article first
+            return True
+        elif article.organizationarticle_set.exists():
+            # Check for sharing with org next
+            organization = article.organizationarticle_set.first().organization
+            if user.OrgUserRelationship.filter(
+                    organization=organization
+                    ).exists():
+                return True
+        elif article.groupsarticle_set.exists():
+            # Check for sharing with group
+            group = article.groupsarticle_set.first().group
+            if user.GroupMemberRelation.filter(group=group).exists():
+                return True
+    except Exception as ex:
+        return False
+
+
+def WIKI_CAN_WRITE(article, user):
+    if user.is_anonymous:
+        return False
+    try:
+        if article.owner == user:
+            return True
+        elif article.organizationarticle_set.exists():
+            organization = article.organizationarticle_set.first().organization
+            if organization.organizationadmins_set.filter(user=user).exists():
+                return True
+    except Exception as ex:
         return False

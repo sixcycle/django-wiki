@@ -17,7 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from wiki.urls import get_pattern as get_wiki_pattern
 from django_nyt.urls import get_pattern as get_nyt_pattern
-from dashboard.views import DashboardView
+from dashboard.views import (
+    DashboardView,
+    my_article_view,
+    create_org_root_view
+)
 from SixcycleWiki.rest.articles.views import (
     ArticleListView,
     ArticleDetailView
@@ -26,6 +30,8 @@ from SixcycleWiki.rest.articles.views import (
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^dashboard/', DashboardView.as_view()),
+    url(r'^myarticles/', my_article_view),
+    url(r'^create_org_root/', create_org_root_view)
 ]
 urlpatterns += [
     url(r'^api/articles/(?P<pk>\d+)/$',
