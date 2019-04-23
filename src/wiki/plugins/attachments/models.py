@@ -158,7 +158,11 @@ def on_revision_delete(instance, *args, **kwargs):
         return
 
     # Remove file
-    path = instance.file.path.split("/")[:-1]
+    try:
+        path = instance.file.path.split("/")[:-1]
+    except NotImplementedError:
+            # This backend storage doesn't implement 'path' so there is no path to delete
+        return
     instance.file.delete(save=False)
 
     # Clean up empty directories
