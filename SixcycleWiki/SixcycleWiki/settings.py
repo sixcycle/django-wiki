@@ -238,6 +238,7 @@ def WIKI_CAN_READ(article, user):
     if user.is_anonymous:
         return False
     try:
+        organization = None
         if article.owner == user:
             return True
         elif article.usersarticle_set.filter(user=user).exists():
@@ -245,13 +246,15 @@ def WIKI_CAN_READ(article, user):
             return True
         elif article.organizationreadarticle_set.exists():
             # Check for sharing with org next
-            organization = article.organizationreadarticle_set.first().organization
+            organization = article.organizationreadarticle_set.first(
+                ).organization
             if user.OrgUserRelationship.filter(
                     organization=organization
                     ).exists():
                 return True
         elif article.organizationeditarticle_set.exists():
-            organization = article.organizationreadarticle_set.first().organization
+            organization = article.organizationreadarticle_set.first(
+                ).organization
             if user.OrgUserRelationship.filter(
                     organization=organization
                     ).exists():
@@ -260,6 +263,9 @@ def WIKI_CAN_READ(article, user):
             # Check for sharing with group
             group = article.groupsarticle_set.first().group
             if user.GroupMemberRelation.filter(group=group).exists():
+                return True
+        elif organization:
+            if user.organizationadmins_set.filter(organization=organization).exists():
                 return True
     except Exception as ex:
         return False
