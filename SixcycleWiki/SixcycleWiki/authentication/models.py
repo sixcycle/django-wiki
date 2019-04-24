@@ -27,10 +27,16 @@ class Organization(models.Model):
         app_label = 'authentication'
 
     def __str__(self):
-        return "{}-{}".format(
-            self.name,
-            self.id
-        )
+        # This is required since the 'Team and Training' Organization is saved
+        # in our table as 'TNT' I have no idea what changing the name will do
+        # to the core product, so its probably safer just to have an edge case
+        # here based on the ID of the organization.
+        if self.id == 10:
+            return "Team and Training"
+        else:
+            return "{}".format(
+                self.name
+            )
 
 
 class OrgUserRelationship(models.Model):

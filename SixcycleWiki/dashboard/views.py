@@ -20,40 +20,51 @@ class DashboardView(TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        print("here")
         # GET AVAILABLE SLUGS
         user = kwargs.get("user", None)
-
-        if Article.objects.filter(owner=user, is_root=True).exists():
-            kwargs["my_articles"] = Article.objects.filter(
-                owner=user,
-                is_root=True
-            ).first().get_absolute_url()
-        else:
-            kwargs["my_articles"] = "/myarticles"
-
-        kwargs["owned_articles"] = Article.objects.filter(
-            owner=user,
-            is_root=False
-        )
-
         user_orgs = user.OrgUserRelationship.all().values_list(
                 'organization_id',
                 flat=True
             )
-        kwargs["org_articles"] = Article.objects.filter(
-            Q(
-                organizationeditarticle__organization__id__in=user_orgs
-            ) |
-            Q(
-                organizationreadarticle__organization__id__in=user_orgs
-            )
-         )
-
         user_groups = user.GroupMemberRelation.all().values_list(
             'group__id',
             flat=True
         )
+
+        # Collections is a list of tuples, where the first element is
+        # the value of 'get_absolute_url', the second element is a specialized
+        # string representation of the collection. In the case for
+        # organizatinos it is the organizations name, in the case for User
+        # collections, it is simply the article's title.
+        collections = []
+        for article in Article.objects.filter(
+            organizationeditarticle__organization__id__in=user_orgs,
+            is_root=True
+                ):
+            collections.append(
+                (
+                    article.get_absolute_url(),
+                    str(article.organizationeditarticle_set.filter(
+                        organization__id__in=user_orgs).first().organization))
+            )
+        for article in Article.objects.filter(
+            organizationreadarticle__organization__id__in=user_orgs,
+            is_root=True
+                ):
+            collections.append(
+                (
+                    article.get_absolute_url(),
+                    str(article.organizationreadarticle_set.filter(
+                        organization__id__in=user_orgs).first().organization)
+                )
+            )
+
+        kwargs["collections"] = list(set(collections))
+
+        if Article.objects.filter(owner=user, is_root=True).exists():
+            kwargs["my_article"] = Article.objects.filter(owner=user, is_root=True).first()
+        else:
+            kwargs["my_article"] = "/myarticles"
 
         kwargs["shared_articles"] = Article.objects.filter(
             Q(
@@ -74,6 +85,8 @@ class DashboardView(TemplateView):
             Q(
                 userreadarticle__user=user
             )
+        ).exclude(
+            is_root=True
         )
         return kwargs
 

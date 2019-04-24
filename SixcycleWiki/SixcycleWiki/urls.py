@@ -29,9 +29,6 @@ from SixcycleWiki.rest.articles.views import (
 )
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^myarticles/', my_article_view),
-    url(r'^create_org_root/', create_org_root_view)
 ]
 urlpatterns += [
     url(r'^api/articles/(?P<pk>\d+)/$',
@@ -42,5 +39,8 @@ urlpatterns += [
 urlpatterns += [
     url(r'^notifications/', get_nyt_pattern()),
     url(r'^wiki/', include('wiki.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^myarticles/', my_article_view),
+    url(r'^create_org_root/', create_org_root_view),
     url(r'', DashboardView.as_view()),
 ]
