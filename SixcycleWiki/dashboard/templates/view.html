@@ -19,7 +19,11 @@
 
 <br>
 <br>
-<a href="{{my_article.get_absolute_url}}">My Articles</a>
+<a href="{{my_article.0.get_absolute_url}}">My Articles</a>
+{% for item in my_article.1 %}
+    <br>
+    <a href="{{item.1}}">{{item.0}}</a>
+{% endfor %}
 <br>
 <h1>Articles Shared with Me</h1>
 {% for shared_article in shared_articles %}

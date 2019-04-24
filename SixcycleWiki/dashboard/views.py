@@ -72,10 +72,21 @@ class DashboardView(TemplateView):
 
         for article in org_root_articles:
             org_name = ""
-            if article.organizationreadarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).exists():
-                org_name = str(article.organizationreadarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).first().organization)
-            elif article.organizationeditarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).exists():
-                org_name = str(article.organizationreadarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).first().organization)
+            if article.organizationreadarticle_set.filter(
+                    article__is_root=True, organization__id__in=user_orgs
+                    ).exists():
+                org_name = str(
+                    article.organizationreadarticle_set.filter(
+                        article__is_root=True, organization__id__in=user_orgs
+                    ).first().organization
+                )
+            elif article.organizationeditarticle_set.filter(
+                    article__is_root=True, organization__id__in=user_orgs
+                    ).exists():
+                org_name = str(
+                    article.organizationreadarticle_set.filter(
+                        article__is_root=True, organization__id__in=user_orgs
+                    ).first().organization)
             final[org_name] = [
                 {
                     child.article: self.parse_link_for_article(child.article)
@@ -85,7 +96,11 @@ class DashboardView(TemplateView):
         kwargs['collections'] = final
 
         if Article.objects.filter(owner=user, is_root=True).exists():
-            kwargs["my_article"] = Article.objects.filter(owner=user, is_root=True).first()
+            my_article = Article.objects.filter(owner=user, is_root=True).first()
+            kwargs["my_article"] = (
+                my_article,
+                self.parse_link_for_article(my_article)
+            )
         else:
             kwargs["my_article"] = "/myarticles"
 
