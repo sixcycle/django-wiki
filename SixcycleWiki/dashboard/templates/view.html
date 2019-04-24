@@ -1,5 +1,6 @@
+{% extends "wiki/base.html" %}
+{% block wiki_contents %}
 <h1>Collections</h1>
-
 {% for url, name in collections %}
 <a href="{{url}}">{{name}}</a>
 {% endfor %}
@@ -11,6 +12,4 @@
 <a href="{{shared_article.get_absolute_url}}">{{shared_article}}</a>
 <br>
 {% endfor %}
-
-
-
+{% endblock %}
