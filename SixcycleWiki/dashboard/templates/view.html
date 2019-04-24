@@ -6,11 +6,11 @@
 {% for root_article, list_of_children_objects in collections.items %}
     {{root_article}}
     <br>
-    {% for child in list_of_children_objects %}
-        {% for child_name, list_links in child.items %}
+    {% for child_objects in list_of_children_objects %}
+        {% for child_name, child_list_of_links in child_objects.items %}
             <br>
             {{child_name}} 
-            {% for readable_text, link in list_links%}
+            {% for readable_text, link in child_list_of_links%}
             <a href="{{link}}">{{readable_text}}</a>
             {% endfor %}
         {% endfor %}
