@@ -17,11 +17,15 @@ class DashboardView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         kwargs["user"] = request.user
+        if request.user.is_anonymous():
+            return redirect(to="/wiki/_accounts/login/?next=/")
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         # GET AVAILABLE SLUGS
         user = kwargs.get("user", None)
+        if user.is_anonymous:
+            return kwargs
         user_orgs = user.OrgUserRelationship.all().values_list(
                 'organization_id',
                 flat=True
