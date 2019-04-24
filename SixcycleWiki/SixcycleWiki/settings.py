@@ -268,9 +268,9 @@ def WIKI_CAN_READ(article, user):
             if user.organizationadmins_set.filter(organization=organization).exists():
                 return True
     except Exception as ex:
-        print("ex is {}").format(
+        print("ex is {}".format(
             ex
-        )
+        ))
         return False
 
 
