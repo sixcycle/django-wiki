@@ -8,12 +8,35 @@ from dashboard.models import OrganizationAdmins
 from relationships.models import *
 from django.db.models import Q
 from .values import CONTENT_PLACEHOLDER_USER_WIKI
+from wiki.plugins.links.mdx.urlize import URLIZE_RE
+import re
 # Create your views here.
 
 
 class DashboardView(TemplateView):
 
     template_name = "view.html"
+
+    def parse_link_for_article(self, article):
+        # Really sorry i had to do it this way, super pressed for time
+        # Anything that isn't a square closing bracket
+        name_regex = "[^]]+"
+        # http:// or https:// followed by anything but a closing paren
+        url_regex = "http[s]?://[^)]+"
+
+        wiki_regex = "wiki:[^)]+"
+
+        markup_regex = '\[({0})]\(\s*({1})\s*\)'.format(name_regex, url_regex)
+        markup_wiki_regex = '\[({0})]\(\s*({1})\s*\)'.format(name_regex, wiki_regex)
+
+        contents = []
+        for match in re.findall(markup_regex, article.current_revision.content):
+            contents.append(match)
+
+        for match in re.findall(markup_wiki_regex, article.current_revision.content):
+            parsed_match = (match[0], match[1].replace("wiki:", ""))
+            contents.append(parsed_match)
+        return contents
 
     def dispatch(self, request, *args, **kwargs):
         kwargs["user"] = request.user
@@ -35,35 +58,31 @@ class DashboardView(TemplateView):
             flat=True
         )
 
-        # Collections is a list of tuples, where the first element is
-        # the value of 'get_absolute_url', the second element is a specialized
-        # string representation of the collection. In the case for
-        # organizatinos it is the organizations name, in the case for User
-        # collections, it is simply the article's title.
-        collections = []
-        for article in Article.objects.filter(
-            organizationeditarticle__organization__id__in=user_orgs,
-            is_root=True
-                ):
-            collections.append(
-                (
-                    article.get_absolute_url(),
-                    str(article.organizationeditarticle_set.filter(
-                        organization__id__in=user_orgs).first().organization))
+        final = dict()
+        org_root_articles = Article.objects.filter(
+            Q(
+                organizationeditarticle__organization__id__in=user_orgs,
+                is_root=True
+            ) |
+            Q(
+                organizationreadarticle__organization__id__in=user_orgs,
+                is_root=True
             )
-        for article in Article.objects.filter(
-            organizationreadarticle__organization__id__in=user_orgs,
-            is_root=True
-                ):
-            collections.append(
-                (
-                    article.get_absolute_url(),
-                    str(article.organizationreadarticle_set.filter(
-                        organization__id__in=user_orgs).first().organization)
-                )
-            )
+        )
 
-        kwargs["collections"] = list(set(collections))
+        for article in org_root_articles:
+            org_name = ""
+            if article.organizationreadarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).exists():
+                org_name = str(article.organizationreadarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).first().organization)
+            elif article.organizationeditarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).exists():
+                org_name = str(article.organizationreadarticle_set.filter(article__is_root=True, organization__id__in=user_orgs).first().organization)
+            final[org_name] = [
+                {
+                    child.article: self.parse_link_for_article(child.article)
+                } for child in article.get_children()
+            ]
+
+        kwargs['collections'] = final
 
         if Article.objects.filter(owner=user, is_root=True).exists():
             kwargs["my_article"] = Article.objects.filter(owner=user, is_root=True).first()

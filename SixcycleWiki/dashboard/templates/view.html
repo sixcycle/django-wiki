@@ -1,9 +1,23 @@
 {% extends "wiki/base.html" %}
 {% block wiki_contents %}
 <h1>Collections</h1>
-{% for url, name in collections %}
-<a href="{{url}}">{{name}}</a>
+
+
+{% for root_article, list_of_children_objects in collections.items %}
+    {{root_article}}
+    <br>
+    {% for child in list_of_children_objects %}
+        {% for child_name, list_links in child.items %}
+            <br>
+            {{child_name}} 
+            {% for readable_text, link in list_links%}
+            <a href="{{link}}">{{readable_text}}</a>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
 {% endfor %}
+
+<br>
 <br>
 <a href="{{my_article.get_absolute_url}}">My Articles</a>
 <br>
