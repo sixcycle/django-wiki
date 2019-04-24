@@ -34,7 +34,7 @@ class DashboardView(TemplateView):
             contents.append(match)
 
         for match in re.findall(markup_wiki_regex, article.current_revision.content):
-            parsed_match = (match[0], match[1].replace("wiki:", ""))
+            parsed_match = (match[0], "wiki/" + match[1].replace("wiki:", ""))
             contents.append(parsed_match)
         return contents
 
