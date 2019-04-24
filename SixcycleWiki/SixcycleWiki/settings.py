@@ -241,7 +241,10 @@ def WIKI_CAN_READ(article, user):
         organization = None
         if article.owner == user:
             return True
-        elif article.usersarticle_set.filter(user=user).exists():
+        elif article.userreadarticle_set.filter(user=user).exists():
+            # Check for direct sharing access to article first
+            return True
+        elif article.usereditarticle_set.filter(user=user).exists():
             # Check for direct sharing access to article first
             return True
         elif article.organizationreadarticle_set.exists():
