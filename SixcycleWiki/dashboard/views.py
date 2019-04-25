@@ -71,23 +71,20 @@ class DashboardView(TemplateView):
         )
 
         for article in org_root_articles:
-            org_name = ""
+            org = None
             if article.organizationreadarticle_set.filter(
                     article__is_root=True, organization__id__in=user_orgs
                     ).exists():
-                org_name = str(
-                    article.organizationreadarticle_set.filter(
+                org = article.organizationreadarticle_set.filter(
                         article__is_root=True, organization__id__in=user_orgs
                     ).first().organization
-                )
             elif article.organizationeditarticle_set.filter(
                     article__is_root=True, organization__id__in=user_orgs
                     ).exists():
-                org_name = str(
-                    article.organizationreadarticle_set.filter(
+                org = article.organizationreadarticle_set.filter(
                         article__is_root=True, organization__id__in=user_orgs
-                    ).first().organization)
-            final[org_name] = [
+                    ).first().organization
+            final[org] = [
                 {
                     child.article: self.parse_link_for_article(child.article)
                 } for child in article.get_children()
@@ -171,7 +168,7 @@ def create_org_root_view(request):
             slug='{}-resources'.format(
                 org.name.replace(" ", "-")
             ),
-            title="Resources",
+            title="Articles",
             request=request,
             article_kwargs={"owner": user, "is_root": True},
             content=CONTENT_PLACEHOLDER_USER_WIKI

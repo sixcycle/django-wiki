@@ -262,9 +262,9 @@ def WIKI_CAN_READ(article, user):
                     organization=organization
                     ).exists():
                 return True
-        elif article.groupsarticle_set.exists():
+        elif article.groupreadarticle_set.exists():
             # Check for sharing with group
-            group = article.groupsarticle_set.first().group
+            group = article.groupreadarticle_set.first().group
             if user.GroupMemberRelation.filter(group=group).exists():
                 return True
         elif organization:

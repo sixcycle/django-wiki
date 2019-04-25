@@ -1,5 +1,6 @@
 from authtools.models import AbstractEmailUser
 from django.db import models
+from jsonfield import JSONField
 
 
 class User(AbstractEmailUser):
@@ -20,7 +21,13 @@ class Organization(models.Model):
         blank=True,
         default='https://s3.amazonaws.com/sixcycle/customAssets/placeholder-avatar-group.png'
     )
-    template_prefix = models.CharField(max_length=255, blank=True)
+    profile_picture_styling = JSONField(default='{}')
+    banner_image = models.URLField(
+        'picture',
+        blank=True,
+        null=True
+    )
+    banner_image_styling = JSONField(default='{}')
 
     class Meta:
         db_table = 'profiles_organization'

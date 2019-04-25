@@ -14,6 +14,7 @@ django-authtools==1.6.0
 django-classy-tags==0.8.0
 django-cors-headers==2.4.0
 django-js-asset==1.2.1
+django-jsonfield==1.1.0
 django-mptt==0.9.1
 django-nyt==1.1.2
 django-rest-auth==0.9.3
