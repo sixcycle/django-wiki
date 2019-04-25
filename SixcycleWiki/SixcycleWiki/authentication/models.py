@@ -20,6 +20,13 @@ class Organization(models.Model):
         blank=True,
         default='https://s3.amazonaws.com/sixcycle/customAssets/placeholder-avatar-group.png'
     )
+    profile_picture_styling = JSONField(default='{}')
+    banner_image = models.URLField(
+        'picture',
+        blank=True,
+        null=True
+    )
+    banner_image_styling = JSONField(default='{}')
     template_prefix = models.CharField(max_length=255, blank=True)
 
     class Meta:

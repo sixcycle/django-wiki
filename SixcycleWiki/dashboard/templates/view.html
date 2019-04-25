@@ -1,33 +1,65 @@
 {% extends "wiki/base.html" %}
 {% block wiki_contents %}
-<h1>Collections</h1>
-
-
-{% for root_article, list_of_children_objects in collections.items %}
-    {{root_article}}
-    <br>
-    {% for child_objects in list_of_children_objects %}
-        {% for child_name, child_list_of_links in child_objects.items %}
-            <br>
-            {{child_name}} 
-            {% for readable_text, link in child_list_of_links%}
-            <a href="{{link}}">{{readable_text}}</a>
-            {% endfor %}
-        {% endfor %}
+<div class='collectionsWrapper'>
+    <div class='collectionTopSection'>
+        <div class='collectionsResourcesBox'>Resources</div>
+        <div class='collectionsHeader'>Collections</div>
+    </div>
+    {% for root_article, list_of_children_objects in collections.items %}
+        <div class='rootArticleWrapper'>
+            <div class='rootArticleHeader'>{{root_article}}</div>
+            <div class='rootArticleChildWrapper'>
+                {% for child_objects in list_of_children_objects %}
+                    {% for child_name, child_list_of_links in child_objects.items %}
+                        <div class='rootArticleChild'>
+                            <div class='articleChildTopSection'>
+                                <div class='articleChildIcon'></div>
+                                <div class='articleChildName'>{{child_name}}</div>
+                            </div> 
+                            <div class='articleChildList'>
+                                {% for readable_text, link in child_list_of_links%}
+                                    <div class='articleChildLink'>
+                                        <a href="{{link}}">{{readable_text}}</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div class='rootArticleNewButton'><div class='innerPlusButton'>+</div></div>
+            </div>
+        </div>
     {% endfor %}
-{% endfor %}
-
-<br>
-<br>
-<a href="{{my_article.0.get_absolute_url}}">My Articles</a>
-{% for item in my_article.1 %}
-    <br>
-    <a href="{{item.1}}">{{item.0}}</a>
-{% endfor %}
-<br>
-<h1>Articles Shared with Me</h1>
-{% for shared_article in shared_articles %}
-<a href="{{shared_article.get_absolute_url}}">{{shared_article}}</a>
-<br>
-{% endfor %}
+    <div class='personalCollectionsWrapper'>
+        <div class='personalCollectionsTitle'>Personal Collections</div>
+        <div class='personalCollectionsInnerWrapper'>
+            <div class='myArticleWrapper'>
+                <div class='myArticleTopSection'>
+                    <div class='myArticleIcon'></div>
+                    <div class='myArticleTitle'>
+                        <a href="{{my_article.0.get_absolute_url}}">My Articles</a>
+                    </div>    
+                </div>
+                <div class='myArticleList'>
+                    {% for item in my_article.1 %}
+                        <div class='myArticleLink'>
+                            <a href="{{item.1}}">{{item.0}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class='personalCollectionNewButton'><div class='innerPlusButton'>+</div></div>
+        </div>
+    </div>
+    <div class='sharedArticlesWrapper'>
+        <div class='sharedArticlesTitle'>Articles Shared with Me</div>
+        <div class='sharedArticlesList'>
+            {% for shared_article in shared_articles %}
+                <div class='sharedArticlesEach'>
+                    <a href="{{shared_article.get_absolute_url}}">{{shared_article}}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
