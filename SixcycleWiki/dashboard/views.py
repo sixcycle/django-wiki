@@ -130,7 +130,7 @@ class DashboardView(TemplateView):
 
 def my_article_view(request):
     user = request.user
-    if not request.user.allowedusers_set.exits():
+    if not request.user.allowedusers_set.exists():
         return HttpResponseForbidden()
     user_root_article = Article.objects.filter(
         owner=user,
@@ -161,6 +161,8 @@ def create_org_root_view(request):
         org_id = request.GET.get("org_id", None)
         user = request.user
         if not user.is_superuser:
+            return HttpResponseForbidden()
+        if not request.user.allowedusers_set.exists():
             return HttpResponseForbidden()
         org_root_article = Article.objects.filter(
             organizationarticle__organization_id=int(org_id),
