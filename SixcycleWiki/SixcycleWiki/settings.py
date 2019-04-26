@@ -16,7 +16,7 @@ from boto.s3.connection import SubdomainCallingFormat
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+ENVIRONMENT = os.environ.get('environment', None)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -28,7 +28,8 @@ AWS_SECRET_ACCESS_KEY = 'VQU/Ua5G0GDQdDbsDdpTiJlJ33TkdD7grrP51Syj'
 AWS_CALLING_FORMAT = SubdomainCallingFormat
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENVIRONMENT != "production":
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     'sixcycle-wiki-env.7dwtp34aiu.us-east-1.elasticbeanstalk.com',
@@ -51,7 +52,6 @@ STATICFILES_DIRS = [
     "SixcycleWiki/wiki/static/"
 ]
 # Adding these settings for application to work in HTTPS
-ENVIRONMENT = os.environ.get('environment', None)
 if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
@@ -173,6 +173,11 @@ AWS_STORAGE_BUCKET_NAME = 'sixcycle-wiki-storage'
 AWS_S3_REGION_NAME = 'us-east-1'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
+if ENVIRONMENT == "staging"
+    DB_HOST_URL = 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com'
+elif ENVIRONMENT == "production":
+    DB_HOST_URL = 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com'
 
 DATABASES = {
     'default': {

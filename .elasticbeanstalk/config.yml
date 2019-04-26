@@ -1,4 +1,6 @@
 branch-defaults:
+  dashboard:
+    environment: sixcycle-wiki-live-env
   master:
     environment: wiki
     group_suffix: null
@@ -10,7 +12,7 @@ global:
   application_name: sixcycle-wiki
   branch: null
   default_ec2_keyname: sixcycleServerKey
-  default_platform: python-3.5.2
+  default_platform: python-3.6
   default_region: us-east-1
   include_git_submodules: true
   instance_profile: null
