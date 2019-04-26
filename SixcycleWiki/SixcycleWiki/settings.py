@@ -243,8 +243,8 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
 
 
 def WIKI_CAN_READ(article, user):
-    return user.allowedusers.exists()
+    return user.allowedusers_set.exists()
 
 
 def WIKI_CAN_WRITE(article, user):
-    return user.allowedusers.exists()
+    return user.allowedusers_set.exists()
