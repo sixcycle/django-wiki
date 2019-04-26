@@ -180,7 +180,7 @@ AWS_S3_REGION_NAME = 'us-east-1'
 if ENVIRONMENT == "staging":
     DB_HOST_URL = 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com'
 elif ENVIRONMENT == "production":
-    DB_HOST_URL = 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com'
+    DB_HOST_URL = 'sixcyclestg-db.cd8omj5dryba.us-east-1.rds.amazonaws.com'
 
 DATABASES = {
     'default': {
@@ -188,7 +188,7 @@ DATABASES = {
         'NAME': 'SixCycleDB',
         'USER': 'sa',
         'PASSWORD': 'p0o9i8u7',
-        'HOST': 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com',
+        'HOST': DB_HOST_URL,
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
