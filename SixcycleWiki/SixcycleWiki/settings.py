@@ -176,7 +176,7 @@ AWS_S3_REGION_NAME = 'us-east-1'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-
+DB_HOST_URL = 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com'
 if ENVIRONMENT == "staging":
     DB_HOST_URL = 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com'
 elif ENVIRONMENT == "production":
