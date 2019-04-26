@@ -70,6 +70,7 @@ class ArticleAdmin(admin.ModelAdmin):
     inlines = [ArticleRevisionInline]
     form = ArticleForm
     search_fields = ('current_revision__title', 'current_revision__content')
+    raw_id_fields = ('owner',)
 
 
 class URLPathAdmin(MPTTModelAdmin):
