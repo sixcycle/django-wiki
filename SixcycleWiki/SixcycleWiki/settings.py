@@ -243,57 +243,8 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
 
 
 def WIKI_CAN_READ(article, user):
-    if user.is_anonymous:
-        return False
-    try:
-        organization = None
-        if article.owner == user:
-            return True
-        elif article.userreadarticle_set.filter(user=user).exists():
-            # Check for direct sharing access to article first
-            return True
-        elif article.usereditarticle_set.filter(user=user).exists():
-            # Check for direct sharing access to article first
-            return True
-        elif article.organizationreadarticle_set.exists():
-            # Check for sharing with org next
-            organization = article.organizationreadarticle_set.first(
-                ).organization
-            if user.OrgUserRelationship.filter(
-                    organization=organization
-                    ).exists():
-                return True
-        elif article.organizationeditarticle_set.exists():
-            organization = article.organizationreadarticle_set.first(
-                ).organization
-            if user.OrgUserRelationship.filter(
-                    organization=organization
-                    ).exists():
-                return True
-        elif article.groupreadarticle_set.exists():
-            # Check for sharing with group
-            group = article.groupreadarticle_set.first().group
-            if user.GroupMemberRelation.filter(group=group).exists():
-                return True
-        elif organization:
-            if user.organizationadmins_set.filter(organization=organization).exists():
-                return True
-    except Exception as ex:
-        print("ex is {}".format(
-            ex
-        ))
-        return False
+    return request.user.allowedusers.exists()
 
 
 def WIKI_CAN_WRITE(article, user):
-    if user.is_anonymous:
-        return False
-    try:
-        if article.owner == user:
-            return True
-        elif article.organizationarticle_set.exists():
-            organization = article.organizationarticle_set.first().organization
-            if organization.organizationadmins_set.filter(user=user).exists():
-                return True
-    except Exception as ex:
-        return False
+    return request.user.allowedusers.exists()
