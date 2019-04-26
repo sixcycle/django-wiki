@@ -17,20 +17,30 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from wiki.urls import get_pattern as get_wiki_pattern
 from django_nyt.urls import get_pattern as get_nyt_pattern
+from dashboard.views import (
+    DashboardView,
+    my_article_view,
+    create_org_root_view
+)
+from SixcycleWiki.rest.sharing.views import ShareView
 from SixcycleWiki.rest.articles.views import (
     ArticleListView,
     ArticleDetailView
 )
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
 ]
 urlpatterns += [
     url(r'^api/articles/(?P<pk>\d+)/$',
         ArticleDetailView.as_view()),
     url(r'^api/articles/', ArticleListView.as_view()),
+    url(r'^api/share_article/', ShareView.as_view())
 ]
 urlpatterns += [
     url(r'^notifications/', get_nyt_pattern()),
-    url(r'', get_wiki_pattern())
+    url(r'^wiki/', include('wiki.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^myarticles/', my_article_view),
+    url(r'^create_org_root/', create_org_root_view),
+    url(r'', DashboardView.as_view()),
 ]

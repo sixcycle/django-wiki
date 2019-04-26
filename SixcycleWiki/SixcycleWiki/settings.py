@@ -16,7 +16,7 @@ from boto.s3.connection import SubdomainCallingFormat
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+ENVIRONMENT = os.environ.get('environment', None)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -28,10 +28,13 @@ AWS_SECRET_ACCESS_KEY = 'VQU/Ua5G0GDQdDbsDdpTiJlJ33TkdD7grrP51Syj'
 AWS_CALLING_FORMAT = SubdomainCallingFormat
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENVIRONMENT != "production":
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     'sixcycle-wiki-env.7dwtp34aiu.us-east-1.elasticbeanstalk.com',
+    'sixcycle-wiki-live-env.7dwtp34aiu.us-east-1.elasticbeanstalk.com',
+    'wiki.sixcycle.com',
     'wiki-stg.sixcycle.com',
     'dev2.sixcycle.com',
     '127.0.0.1',
@@ -51,7 +54,6 @@ STATICFILES_DIRS = [
     "SixcycleWiki/wiki/static/"
 ]
 # Adding these settings for application to work in HTTPS
-ENVIRONMENT = os.environ.get('environment', None)
 if ENVIRONMENT == 'staging' or ENVIRONMENT == 'production':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
@@ -94,6 +96,9 @@ INSTALLED_APPS = [
     'SixcycleWiki.authentication',
     'SixcycleWiki.rest',
     'django_thumbor',
+    'dashboard',
+    'relationships',
+    'wikiextensions'
 ]
 
 REST_FRAMEWORK = {
@@ -123,7 +128,7 @@ MIDDLEWARE += [
 AUTHENTICATION_BACKENDS = [
     'SixcycleWiki.authentication_backend.TokenFromQueryParameterBackend',
     'SixcycleWiki.authentication_backend.MyBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -171,13 +176,19 @@ AWS_S3_REGION_NAME = 'us-east-1'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+DB_HOST_URL = 'stg.cd8omj5dryba.us-east-1.rds.amazonaws.com'
+if ENVIRONMENT == "staging":
+    DB_HOST_URL = 'stg.cd8omj5dryba.us-east-1.rds.amazonaws.com'
+elif ENVIRONMENT == "production":
+    DB_HOST_URL = 'sixcyclestg-db.cd8omj5dryba.us-east-1.rds.amazonaws.com'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SixCycleDB',
         'USER': 'sa',
         'PASSWORD': 'p0o9i8u7',
-        'HOST': 'wiki.cd8omj5dryba.us-east-1.rds.amazonaws.com',
+        'HOST': DB_HOST_URL,
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
@@ -229,3 +240,15 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
     "video-js",
     "link"
 ]
+
+
+def WIKI_CAN_READ(article, user):
+    if user.is_anonymous():
+        return False
+    return user.allowedusers_set.exists()
+
+
+def WIKI_CAN_WRITE(article, user):
+    if user.is_anonymous():
+        return False
+    return user.allowedusers_set.exists()

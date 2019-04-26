@@ -257,6 +257,218 @@ body {
 	margin-top: 12px;
 }
 
+.container.editPage .panel-group {
+	margin-bottom: 0px;
+}
+
+.container .collectionsWrapper .collectionsHeader {
+	font-size: 25px;
+	font-weight: 900;
+	line-height: 30px;
+	text-shadow: 1px 0 black;
+}
+
+.container .collectionsWrapper .rootArticleHeader {
+	font-size: 18px;
+	line-height: 21px;
+	margin-bottom: 12px;
+}
+
+.container .collectionsWrapper .collectionTopSection {
+	margin-bottom: 25px;
+}
+
+.container .collectionsWrapper .collectionTopSection .collectionsResourcesBox {
+	color: #777;
+	padding: 8px 15px;
+    margin-bottom: 40px;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChildWrapper {
+	display: flex;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild {
+	box-shadow: 1px 1px 5px 2px #ccc;
+	height: 259px;
+	width: 362px;
+	border-radius: 4px;
+	margin-right: 31px;
+}
+
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleNewButton{
+	box-shadow: 1px 1px 5px 2px #ccc;
+	height: 259px;
+	width: 362px;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleNewButton .innerPlusButton{
+    font-size: 95px;
+    font-weight: 900;
+    text-shadow: 1px 0px lightgrey;
+    color: lightgray;
+    padding-top: 45px;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection {
+	height: 79px;
+	width: 362px;
+	border-radius: 4px 4px 0px 0px;
+	display: flex;
+	background: 
+	repeating-linear-gradient(
+	  45deg,
+	  #606dbc,
+	  #606dbc 10px,
+	  #465298 10px,
+	  #465298 20px
+	)
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection .articleChildIcon {
+	height: 56px;
+	width: 56px;
+	background-color: white;
+	margin-left: 17px;
+    margin-top: 10px;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection .articleChildName {
+	color: white;
+	font-size: 18px;
+	line-height: 21px;
+	font-weight: bold;
+	padding-left: 7px;
+    padding-top: 10px;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildList {
+	display: flex;
+	flex-direction: column;
+	margin-left: 23px;
+	margin-top: 15px;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildList .articleChildLink {
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildList .articleChildLink a {
+	color: black;
+	text-decoration: none;
+}
+
+.container .collectionsWrapper .personalCollectionsWrapper{
+	margin-top: 38px;
+}
+
+.container .collectionsWrapper .personalCollectionsInnerWrapper{
+	display: flex;
+}
+
+.container .collectionsWrapper .personalCollectionsTitle {
+	font-size: 18px;
+	line-height: 21px;
+	margin-bottom: 12px;
+}
+
+.container .collectionsWrapper .myArticleWrapper {
+	box-shadow: 1px 1px 5px 2px #ccc;
+	height: 259px;
+	width: 362px;
+	border-radius: 4px;
+	margin-right: 31px;	
+}
+
+.container .collectionsWrapper .personalCollectionNewButton {
+	box-shadow: 1px 1px 5px 2px #ccc;
+	height: 259px;
+	width: 362px;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.container .collectionsWrapper .personalCollectionNewButton .innerPlusButton{
+	font-size: 95px;
+	font-weight: 900;
+	text-shadow: 1px 0px lightgrey;
+	color: lightgray;
+	padding-top: 45px;
+}
+
+.container .collectionsWrapper .myArticleTopSection{
+	height: 79px;
+	width: 362px;
+	border-radius: 4px 4px 0px 0px;
+	display: flex;
+	background: 
+	repeating-linear-gradient(
+	  45deg,
+	  #606dbc,
+	  #606dbc 10px,
+	  #465298 10px,
+	  #465298 20px
+	)
+}
+
+.container .collectionsWrapper .myArticleIcon {
+	height: 56px;
+	width: 56px;
+	background-color: white;
+	margin-left: 17px;
+    margin-top: 10px;
+}
+
+.container .collectionsWrapper .myArticleTitle {
+	color: white;
+	font-size: 18px;
+	line-height: 21px;
+	font-weight: bold;
+	padding-left: 7px;
+    padding-top: 10px;
+}
+
+.container .collectionsWrapper .myArticleTitle a {
+	color: white;
+	text-decoration: none;
+}
+
+.container .collectionsWrapper .myArticleList {
+	display: flex;
+	flex-direction: column;
+	margin-left: 23px;
+	margin-top: 15px;
+}
+
+.container .collectionsWrapper .myArticleLink {
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.container .collectionsWrapper .myArticleLink a {
+	color: black;
+	text-decoration: none;
+}
+
+.container .collectionsWrapper .sharedArticlesWrapper {
+	margin-top: 65px;
+}
+
+.container .collectionsWrapper .sharedArticlesWrapper .sharedArticlesTitle {
+	font-size: 25px;
+	font-weight: 500;
+	line-height: 30px;
+	color: black;
+}
+
 @media (min-width: 1200px){
 	.container.editPage .col-lg-4{
 		width: 25% !important;
@@ -290,7 +502,37 @@ body {
 	}
 	.container.editPage #wiki-edit-sidebar {
 		margin-top: 7px;
+		margin-bottom: 20px;
 	}
+}
+
+@media (max-width: 635px){
+	.container.editPage .markItUpHeader {
+		height: 50px;
+	}
+	.container.editPage .col-lg-offset-2 {
+		flex-direction: column;
+	}
+	.container.editPage .col-lg-offset-2 .btn.btn-default{
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-bottom: 5px;
+	}
+	.container.editPage #id_cancel {
+		margin-bottom: 5px;
+		margin-right: 0px;
+	}
+	.container.editPage .col-lg-offset-2 .btn.btn-primary {
+		margin-bottom: 5px;
+	}
+	.container.editPage .col-lg-offset-2 .btn-toolbar.pull-right {
+		display: flex;
+		flex-direction: column;
+	}
+	.container.editPage #article-container .pull-right a {
+		margin-bottom: 5px;
+	}
+
 }
 
 /*#article-container .wiki-article a {

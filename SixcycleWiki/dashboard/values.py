@@ -1,0 +1,1 @@
+CONTENT_PLACEHOLDER_USER_WIKI = "Welcome to your first article! You may edit this page to remove this content. Click here to learn more about creating and editing articles."
