@@ -6,6 +6,6 @@ admin.site.register(OrganizationAdmins)
 
 
 class AllowedUsersAdmin(admin.ModelAdmin):
-    search_files = ['user_email']
+    search_fields = ['user_email']
 
 admin.site.register(AllowedUsers, AllowedUsersAdmin)
