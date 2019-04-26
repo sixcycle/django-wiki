@@ -9,6 +9,7 @@ from relationships.models import *
 from django.db.models import Q
 from .values import CONTENT_PLACEHOLDER_USER_WIKI
 from wiki.plugins.links.mdx.urlize import URLIZE_RE
+from django.contrib.auth import login
 import re
 # Create your views here.
 
@@ -40,8 +41,16 @@ class DashboardView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         kwargs["user"] = request.user
+        token = request.GET.get("token", None)
+        if token:
+            user = User.objects.get(auth_token=token)
+            user.backend = 'SixcycleWiki.authentication_backend.TokenFromQueryParameterBackend'
+            login(request, user)
+            request.user = user
+            return redirect("/")
         if request.user.is_anonymous():
             return redirect(to="/wiki/_accounts/login/?next=/")
+        print(request.user.allowedusers_set.all())
         if not request.user.allowedusers_set.exists():
             return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
