@@ -243,8 +243,12 @@ WIKI_MARKDOWN_HTML_WHITELIST = [
 
 
 def WIKI_CAN_READ(article, user):
+    if user.is_anonymous():
+        return False
     return user.allowedusers_set.exists()
 
 
 def WIKI_CAN_WRITE(article, user):
+    if user.is_anonymous():
+        return False
     return user.allowedusers_set.exists()
