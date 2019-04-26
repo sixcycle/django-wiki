@@ -42,6 +42,8 @@ class DashboardView(TemplateView):
         kwargs["user"] = request.user
         if request.user.is_anonymous():
             return redirect(to="/wiki/_accounts/login/?next=/")
+        if not request.user.allowedusers_set.exits():
+            return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -128,6 +130,8 @@ class DashboardView(TemplateView):
 
 def my_article_view(request):
     user = request.user
+    if not request.user.allowedusers_set.exits():
+        return HttpResponseForbidden()
     user_root_article = Article.objects.filter(
         owner=user,
         is_root=True
