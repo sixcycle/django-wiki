@@ -13,7 +13,13 @@
                     {% for child_name, child_list_of_links in child_objects.items %}
                         <div class='rootArticleChild'>
                             <div class='articleChildTopSection'>
-                                <div class='articleChildIcon'></div>
+                                <img src={{root_article.banner_image}} alt='' />
+                                <div class='articleChildIcon'>
+                                    <img src={{root_article.profilepicture}} alt='' />
+                                    <!-- 
+                                    {{root_article.banner_image}}
+                                    {{root_article.profile_picture_styling}} -->
+                                </div>
                                 <div class='articleChildName'>{{child_name}}</div>
                             </div> 
                             <div class='articleChildList'>
@@ -35,7 +41,7 @@
         <div class='personalCollectionsInnerWrapper'>
             <div class='myArticleWrapper'>
                 <div class='myArticleTopSection'>
-                    <div class='myArticleIcon'></div>
+                    <div class='myArticleIcon'><img src='https://s3.amazonaws.com/sixcycle/customAssets/placeholder-avatar-group.png' alt='' /></div>
                     <div class='myArticleTitle'>
                         <a href="{{my_article.0.get_absolute_url}}">My Articles</a>
                     </div>    
