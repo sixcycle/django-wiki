@@ -5,7 +5,7 @@ from dashboard.models import OrganizationAdmins, AllowedUsers
 admin.site.register(OrganizationAdmins)
 
 
-class AuthorAdmin(admin.ModelAdmin):
+class AllowedUsersAdmin(admin.ModelAdmin):
     search_files = ['user_email']
 
 admin.site.register(AllowedUsers, AllowedUsersAdmin)
