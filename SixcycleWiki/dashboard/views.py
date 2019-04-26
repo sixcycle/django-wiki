@@ -42,7 +42,7 @@ class DashboardView(TemplateView):
         kwargs["user"] = request.user
         if request.user.is_anonymous():
             return redirect(to="/wiki/_accounts/login/?next=/")
-        if not request.user.allowedusers_set.exits():
+        if not request.user.allowedusers_set.exists():
             return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
 
