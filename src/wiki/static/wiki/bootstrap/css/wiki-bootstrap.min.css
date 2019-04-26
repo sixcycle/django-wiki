@@ -290,21 +290,24 @@ body {
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChildWrapper {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild {
 	box-shadow: 1px 1px 5px 2px #ccc;
 	height: 259px;
-	width: 362px;
+	width: 350px;
 	border-radius: 4px;
 	margin-right: 31px;
+	margin-bottom: 10px;
 }
 
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleNewButton{
 	box-shadow: 1px 1px 5px 2px #ccc;
 	height: 259px;
-	width: 362px;
+	min-width: 350px;
+	max-width: 350px;
 	border-radius: 4px;
 	text-align: center;
 }
@@ -319,25 +322,22 @@ body {
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection {
 	height: 79px;
-	width: 362px;
+	width: 350px;
 	border-radius: 4px 4px 0px 0px;
 	display: flex;
-	background: 
-	repeating-linear-gradient(
-	  45deg,
-	  #606dbc,
-	  #606dbc 10px,
-	  #465298 10px,
-	  #465298 20px
-	)
+	background: #162a3d;
 }
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection .articleChildIcon {
 	height: 56px;
 	width: 56px;
-	background-color: white;
 	margin-left: 17px;
     margin-top: 10px;
+}
+
+.container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection .articleChildIcon IMG{
+	height: 56px;
+	width: 56px;
 }
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection .articleChildName {
@@ -372,6 +372,7 @@ body {
 
 .container .collectionsWrapper .personalCollectionsInnerWrapper{
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .container .collectionsWrapper .personalCollectionsTitle {
@@ -383,15 +384,17 @@ body {
 .container .collectionsWrapper .myArticleWrapper {
 	box-shadow: 1px 1px 5px 2px #ccc;
 	height: 259px;
-	width: 362px;
+	width: 350px;
 	border-radius: 4px;
 	margin-right: 31px;	
+	margin-bottom: 10px;
 }
 
 .container .collectionsWrapper .personalCollectionNewButton {
 	box-shadow: 1px 1px 5px 2px #ccc;
 	height: 259px;
-	width: 362px;
+	min-width: 350px;
+	max-width: 350px;
 	border-radius: 4px;
 	text-align: center;
 }
@@ -406,17 +409,10 @@ body {
 
 .container .collectionsWrapper .myArticleTopSection{
 	height: 79px;
-	width: 362px;
+	width: 350px;
 	border-radius: 4px 4px 0px 0px;
 	display: flex;
-	background: 
-	repeating-linear-gradient(
-	  45deg,
-	  #606dbc,
-	  #606dbc 10px,
-	  #465298 10px,
-	  #465298 20px
-	)
+	background: #162a3d;
 }
 
 .container .collectionsWrapper .myArticleIcon {
@@ -425,6 +421,11 @@ body {
 	background-color: white;
 	margin-left: 17px;
     margin-top: 10px;
+}
+
+.container .collectionsWrapper .myArticleIcon IMG{
+	height: 56px;
+	width: 56px;
 }
 
 .container .collectionsWrapper .myArticleTitle {
