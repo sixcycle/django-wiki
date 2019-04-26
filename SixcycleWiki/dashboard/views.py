@@ -153,39 +153,44 @@ def my_article_view(request):
 
 def create_org_root_view(request):
     # TODO: Add better error handling
-    org_id = request.GET.get("org_id", None)
-    user = request.user
-    if not user.is_superuser:
+    try:
+        org_id = request.GET.get("org_id", None)
+        user = request.user
+        if not user.is_superuser:
+            return HttpResponseForbidden()
+        org_root_article = Article.objects.filter(
+            organizationarticle__organization_id=int(org_id),
+            is_root=True
+        ).first()
+        if not org_root_article:
+            org = Organization.objects.get(id=int(org_id))
+            new_path = URLPath.create_urlpath(
+                parent=URLPath.root(),
+                slug='{}-resources'.format(
+                    org.name.replace(" ", "-")
+                ),
+                title="Articles",
+                request=request,
+                article_kwargs={"owner": user, "is_root": True},
+                content=CONTENT_PLACEHOLDER_USER_WIKI
+            )
+            new_path.article.is_root = True
+            new_path.article.save()
+            org_article = OrganizationArticle(
+                organization=Organization.objects.get(id=int(org_id)),
+                article=new_path.article
+            )
+            org_article.save()
+            org_admin = OrganizationAdmins(
+                user=user,
+                organization=org
+            )
+            org_admin.save()
+            return redirect(to=new_path.article.get_absolute_url())
+        else:
+            return redirect(to=org_root_article.get_absolute_url())
         return HttpResponseForbidden()
-    org_root_article = Article.objects.filter(
-        organizationarticle__organization_id=int(org_id),
-        is_root=True
-    ).first()
-    if not org_root_article:
-        org = Organization.objects.get(id=int(org_id))
-        new_path = URLPath.create_urlpath(
-            parent=URLPath.root(),
-            slug='{}-resources'.format(
-                org.name.replace(" ", "-")
-            ),
-            title="Articles",
-            request=request,
-            article_kwargs={"owner": user, "is_root": True},
-            content=CONTENT_PLACEHOLDER_USER_WIKI
-        )
-        new_path.article.is_root = True
-        new_path.article.save()
-        org_article = OrganizationArticle(
-            organization=Organization.objects.get(id=int(org_id)),
-            article=new_path.article
-        )
-        org_article.save()
-        org_admin = OrganizationAdmins(
-            user=user,
-            organization=org
-        )
-        org_admin.save()
-        return redirect(to=new_path.article.get_absolute_url())
-    else:
-        return redirect(to=org_root_article.get_absolute_url())
-    return HttpResponseForbidden()
+    except Exception as ex:
+        print("EXCEPTION IN CREATE OR ROOT IS {}".format(
+            ex
+        ))
