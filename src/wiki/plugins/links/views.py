@@ -3,23 +3,64 @@ from django.views.generic.base import View
 from wiki import models
 from wiki.core.utils import object_to_json_response
 from wiki.decorators import get_article
+from django.db.models import Q
 
 
 class QueryUrlPath(View):
 
     @method_decorator(get_article(can_read=True))
     def dispatch(self, request, article, *args, **kwargs):
+        user = request.user
+        user_groups = user.GroupMemberRelation.all().values_list(
+            'group__id',
+            flat=True
+        )
+        user_orgs = user.OrgUserRelationship.all().values_list(
+                'organization_id',
+                flat=True
+        )
         max_num = kwargs.pop('max_num', 20)
         query = request.GET.get('query', None)
 
         matches = []
 
         if query:
+            matches = models.URLPath.objects.filter(
+                Q(
+                    article__organizationeditarticle__organization__id__in=user_orgs
+                ) |
+                Q(
+                    article__organizationreadarticle__organization__id__in=user_orgs
+                ) |
+                Q(
+                    article__groupeditarticle__group_id__in=user_groups
+                ) |
+                Q(
+                    article__groupreadarticle__group_id__in=user_groups
+                ) |
+                Q(
+                    article__usereditarticle__user=user
+                ) |
+                Q(
+                    article__userreadarticle__user=user
+                ) |
+                Q(
+                    article__owner=user
+                )
+            )
+            print("matches are {}".format(
+                matches
+            ))
             matches = models.URLPath.objects.can_read(
                 request.user).active().filter(
-                article__current_revision__title__contains=query,
-                article__current_revision__deleted=False,
+                Q(article__current_revision__title__contains=query, article__current_revision__deleted=False) |
+                Q(article__current_revision__content__contains=query, article__current_revision__deleted=False) |
+                Q(article__owner__email__contains=query, article__current_revision__deleted=False) |
+                Q(article__owner__name__contains=query, article__current_revision__deleted=False)
             )
+            print("matches are {}".format(
+                matches
+            ))
             matches = matches.select_related_common()
             matches = [
                 "[{title:s}](wiki:{url:s})".format(

@@ -83,6 +83,16 @@ class URLPath(MPTTModel):
         related_name='moved_from'
     )
 
+    def breadcrumb_ancestors(self):
+        """
+            Returns the ancestors of this url path, however this will skip the first
+            ancestor, since want the root ancestor element to return us to /
+        """
+        # "not self.pk": HACK needed till PR#591 is included in all supported django-mptt
+        #   versions. Prevent accessing a deleted URLPath when deleting it from the admin
+        #   interface.
+        return list(self.get_ancestors().select_related_common())[1:]
+
     def __cached_ancestors(self):
         """
         This returns the ancestors of this urlpath. These ancestors are hopefully

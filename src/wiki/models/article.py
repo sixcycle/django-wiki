@@ -68,6 +68,10 @@ class Article(models.Model):
     other_write = models.BooleanField(
         default=True,
         verbose_name=_('others write access'))
+    is_root = models.BooleanField(
+        default=False,
+        verbose_name=_('root article')
+    )
 
     # PERMISSIONS
     def can_read(self, user):

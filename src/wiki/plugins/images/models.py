@@ -114,7 +114,12 @@ def on_image_revision_delete(instance, *args, **kwargs):
     try:
         path = instance.image.path.split("/")[:-1]
     except NotImplementedError:
-            # This backend storage doesn't implement 'path' so there is no path to delete
+        # This backend storage doesn't implement 'path' so there is no path to
+        # delete
+        return
+    except ValueError as ex:
+            # There is no file associated with the image attribute, so there
+            # is no file to delete
         return
 
     # Clean up empty directories
