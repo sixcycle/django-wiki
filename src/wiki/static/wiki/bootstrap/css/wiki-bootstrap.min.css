@@ -13,6 +13,7 @@ body {
 #article-menu {
 	display: flex;
 	flex-direction: column;
+	border-bottom: none !important;
 }
 
 #article-title {
