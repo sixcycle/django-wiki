@@ -18,6 +18,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, FormView, UpdateView
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from wiki import forms
 from wiki.conf import settings
 
@@ -74,6 +76,8 @@ class Login(FormView):
     form_class = AuthenticationForm
     template_name = "wiki/accounts/login.html"
 
+    ## TODO Need to remove this decorator and figure out csrf error
+    @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_anonymous:
             return redirect('wiki:root')
