@@ -151,7 +151,7 @@ LOST_AND_FOUND_SLUG = getattr(
 CHECK_SLUG_URL_AVAILABLE = getattr(
     django_settings,
     'WIKI_CHECK_SLUG_URL_AVAILABLE',
-    True)
+    False)
 
 #: Do we want to log IPs of anonymous users?
 LOG_IPS_ANONYMOUS = getattr(django_settings, 'WIKI_LOG_IPS_ANONYMOUS', True)
