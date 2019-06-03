@@ -23,6 +23,7 @@ body {
 #article-owner-contents {
 	margin-bottom: 15px;
 	font-weight: bold;
+	display: flex;
 }
 
 #article-container {
@@ -82,6 +83,10 @@ body {
 	margin-top: 25px !important;
 }
 
+.container.editPage.errorPage {
+	margin-top: 0px !important;
+}
+
 .container.editPage #article-menu,
 .container.editPage #article-breadcrumbs{
 	display: none;
@@ -138,6 +143,7 @@ body {
 	border-top: 0px;
 	border: none;
 	font-style: italic;
+	position: relative;
 }
 
 .container.editPage #div_id_summary #summaryText {
@@ -145,7 +151,7 @@ body {
 	font-size: 9px;
 	left: 27px;
 	color: gray;
-	top: 47px;
+	top: 6px;
 }
 
 .container.editPage #id_summary {
@@ -256,6 +262,10 @@ body {
 
 .container.editPage #wiki-edit-sidebar {
 	margin-top: 12px;
+}
+
+.container.editPage.errorPage #wiki-edit-sidebar {
+	margin-top: 115px;
 }
 
 .container.editPage .panel-group {
@@ -469,6 +479,11 @@ body {
 	font-weight: 500;
 	line-height: 30px;
 	color: black;
+}
+
+.alert-danger {
+	width: 98% !important;
+	margin-bottom: 50px !important;
 }
 
 @media (min-width: 1200px){

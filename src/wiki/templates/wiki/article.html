@@ -30,8 +30,9 @@
       {% if article.owner %}
         <div id="article-owner-contents">
             <img src="{% thumbor_url article.owner.profile_picture_url width=35 height=35%}" width="35" height="35" style="border-radius: 2px;">
-            <small style="font-size: 14px;">
+            <small style="font-size: 14px; margin-left: 5px; margin-top: -2px;">
                 {{article.owner.name}}
+                <p style="margin-bottom: 10px;"><em>{{ article.current_revision.modified }}</em></p>
             </small>
         </div>
       {% endif %}
@@ -47,5 +48,5 @@
 {% endblock %}
 
 {% block wiki_footer_prepend %}
-  <p style="margin-bottom: 10px;"><em>{{ article.current_revision.modified }}</em></p>
+  <!-- <p style="margin-bottom: 10px;"><em>{{ article.current_revision.modified }}</em></p> -->
 {% endblock %}
