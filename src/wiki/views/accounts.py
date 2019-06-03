@@ -76,8 +76,6 @@ class Login(FormView):
     form_class = AuthenticationForm
     template_name = "wiki/accounts/login.html"
 
-    ## TODO Need to remove this decorator and figure out csrf error
-    @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_anonymous:
             return redirect('wiki:root')
