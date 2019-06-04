@@ -458,6 +458,13 @@ body {
     padding-top: 10px;
 }
 
+.container .rootArticleChildWrapper .articleChildName a{
+	color: white;
+	font-size: 18px;
+	line-height: 21px;
+	font-weight: bold;
+}
+
 .container .collectionsWrapper .myArticleTitle a {
 	color: white;
 	text-decoration: none;
