@@ -29,7 +29,6 @@
                     formtarget="previewWindow"
                     >
               <span class="fa fa-eye"></span>
-              {% trans "Preview" %}
             </button>
 
             <button class="btn btn-primary" type="submit" name="cancel" value="1" id="id_cancel">
@@ -37,8 +36,7 @@
             </button>
             
             <button class="btn btn-primary" type="submit" name="save" value="1" id="id_save">
-              <span class="fa fa-check"></span>
-              {% trans "Save changes" %}
+              {% trans "Save" %}
             </button>
 
 
@@ -46,13 +44,11 @@
               {% if user.is_authenticated and urlpath.path %}
               <a href="{% url 'wiki:move' path=urlpath.path article_id=article.id %}" class="btn btn-warning ">
                 <span class="fa fa-random"></span>
-                {% trans "Move article" %}
               </a>
               {% endif %}
               {% if article|can_delete:user %}
               <a href="{% url 'wiki:delete' path=urlpath.path article_id=article.id %}" class="btn btn-danger">
                 <span class="fa fa-trash-o"></span>
-                {% trans "Delete article" %}
               </a>
               {% endif %}
             </div>

@@ -171,12 +171,20 @@ body {
 }
 
 .container.editPage .form-actions {
-	order: 4;
-	margin-top: 0px;
+/*	order: 4;
+*/	margin-top: 0px;
 	padding: 5px;
-	width: 100vw;
-	border-top: 1px solid lightgray;
-	background-color: white;
+/*	width: 44vw;
+*/	border-top: none !important;
+	background-color: transparent;
+	position: fixed;
+	top: 1px;
+	right: 13px;
+	padding-left: 0px;
+}
+
+.container.editPage .form-actions .btn {
+	padding: 3px 7px;
 }
 
 .container.editPage .form-group {
@@ -238,7 +246,7 @@ body {
 
 .container.editPage .col-lg-offset-2 .btn.btn-default {
 	order: 2;
-	margin-left: auto;
+	margin-left: 6px;
 	margin-right: 10px;
 }
 
@@ -255,13 +263,15 @@ body {
 }
 
 .container.editPage #id_cancel {
-	margin-right: 10px;
+	margin-right: 6px;
 	background-color: gray !important;
 	border-color: gray !important;
 }
 
 .container.editPage #wiki-edit-sidebar {
 	margin-top: 12px;
+	max-height: calc(100vh - 60px);
+    overflow: scroll;
 }
 
 .container.editPage.errorPage #wiki-edit-sidebar {
@@ -485,7 +495,7 @@ body {
 	width: 98% !important;
 	margin-bottom: 50px !important;
 }
-
+/*
 @media (min-width: 1200px){
 	.container.editPage .col-lg-4{
 		width: 25% !important;
@@ -550,7 +560,7 @@ body {
 		margin-bottom: 5px;
 	}
 
-}
+}*/
 
 /*#article-container .wiki-article a {
 	color: #334b62;
