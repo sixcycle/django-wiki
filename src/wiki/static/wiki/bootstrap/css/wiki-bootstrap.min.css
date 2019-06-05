@@ -14,10 +14,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	border-bottom: none !important;
+	margin-bottom: 0px !important;
 }
 
 #article-title {
-	margin-bottom: 5px !important;
+	margin-bottom: 10px !important;
 }
 
 #article-owner-contents {
@@ -27,8 +28,8 @@ body {
 }
 
 #article-container {
-	margin-top: 20px !important;
-}
+/*	margin-top: 20px !important;
+*/}
 
 #article-container .pull-right a{
 	color: #ababab;
@@ -171,12 +172,20 @@ body {
 }
 
 .container.editPage .form-actions {
-	order: 4;
-	margin-top: 0px;
+/*	order: 4;
+*/	margin-top: 0px;
 	padding: 5px;
-	width: 100vw;
-	border-top: 1px solid lightgray;
-	background-color: white;
+/*	width: 44vw;
+*/	border-top: none !important;
+	background-color: transparent;
+	position: fixed;
+	top: 1px;
+	right: 13px;
+	padding-left: 0px;
+}
+
+.container.editPage .form-actions .btn {
+	padding: 3px 7px;
 }
 
 .container.editPage .form-group {
@@ -238,7 +247,7 @@ body {
 
 .container.editPage .col-lg-offset-2 .btn.btn-default {
 	order: 2;
-	margin-left: auto;
+	margin-left: 6px;
 	margin-right: 10px;
 }
 
@@ -255,13 +264,15 @@ body {
 }
 
 .container.editPage #id_cancel {
-	margin-right: 10px;
+	margin-right: 6px;
 	background-color: gray !important;
 	border-color: gray !important;
 }
 
 .container.editPage #wiki-edit-sidebar {
 	margin-top: 12px;
+	max-height: calc(100vh - 60px);
+    overflow: scroll;
 }
 
 .container.editPage.errorPage #wiki-edit-sidebar {
@@ -309,8 +320,8 @@ body {
 	height: 259px;
 	width: 350px;
 	border-radius: 4px;
-	margin-right: 31px;
-	margin-bottom: 10px;
+	margin-right: 20px;
+	margin-bottom: 20px;
 }
 
 
@@ -448,6 +459,13 @@ body {
     padding-top: 10px;
 }
 
+.container .rootArticleChildWrapper .articleChildName a{
+	color: white;
+	font-size: 18px;
+	line-height: 21px;
+	font-weight: bold;
+}
+
 .container .collectionsWrapper .myArticleTitle a {
 	color: white;
 	text-decoration: none;
@@ -485,7 +503,7 @@ body {
 	width: 98% !important;
 	margin-bottom: 50px !important;
 }
-
+/*
 @media (min-width: 1200px){
 	.container.editPage .col-lg-4{
 		width: 25% !important;
@@ -550,7 +568,7 @@ body {
 		margin-bottom: 5px;
 	}
 
-}
+}*/
 
 /*#article-container .wiki-article a {
 	color: #334b62;
