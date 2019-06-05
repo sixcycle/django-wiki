@@ -186,6 +186,8 @@ body {
 
 .container.editPage .form-actions .btn {
 	padding: 3px 7px;
+	font-size: 12px;
+	margin-top: 1px;
 }
 
 .container.editPage .form-group {
@@ -343,7 +345,7 @@ body {
 }
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection {
-	height: 79px;
+	height: 77px;
 	width: 350px;
 	border-radius: 4px 4px 0px 0px;
 	display: flex;
@@ -464,6 +466,7 @@ body {
 	font-size: 18px;
 	line-height: 21px;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .container .collectionsWrapper .myArticleTitle a {
