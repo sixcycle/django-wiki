@@ -275,10 +275,19 @@ body {
 	margin-top: 12px;
 	max-height: calc(100vh - 60px);
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .container.editPage.errorPage #wiki-edit-sidebar {
 	margin-top: 115px;
+}
+
+.container.editPage.errorPage .form-actions {
+	top: 80px !important;
+}
+
+.container.editPage.errorPage #div_id_content #id_content {
+    height: calc(100vh - 230px);
 }
 
 .container.editPage .panel-group {
@@ -320,7 +329,7 @@ body {
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild {
 	box-shadow: 1px 1px 5px 2px #ccc;
 	height: 259px;
-	width: 350px;
+	width: 340px;
 	border-radius: 4px;
 	margin-right: 20px;
 	margin-bottom: 20px;
@@ -345,8 +354,8 @@ body {
 }
 
 .container .collectionsWrapper .rootArticleWrapper .rootArticleChild .articleChildTopSection {
-	height: 77px;
-	width: 350px;
+	height: 75px;
+	width: 340px;
 	border-radius: 4px 4px 0px 0px;
 	display: flex;
 	background: #162a3d;
@@ -408,7 +417,7 @@ body {
 .container .collectionsWrapper .myArticleWrapper {
 	box-shadow: 1px 1px 5px 2px #ccc;
 	height: 259px;
-	width: 350px;
+	width: 340px;
 	border-radius: 4px;
 	margin-right: 31px;	
 	margin-bottom: 10px;
@@ -432,8 +441,8 @@ body {
 }
 
 .container .collectionsWrapper .myArticleTopSection{
-	height: 79px;
-	width: 350px;
+	height: 75px;
+	width: 340px;
 	border-radius: 4px 4px 0px 0px;
 	display: flex;
 	background: #162a3d;
