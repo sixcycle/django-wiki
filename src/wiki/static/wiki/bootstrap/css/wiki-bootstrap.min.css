@@ -5,6 +5,14 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'sf-bold';
+	src: url('./fonts/SFUIText-Bold.woff') format('woff'), url('./fonts/SFUIText-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
 body {
 	font-family: 'sf-regular' !important;
 	overscroll-behavior: none;
@@ -582,10 +590,10 @@ body {
 
 }*/
 
-/*#article-container .wiki-article a {
-	color: #334b62;
+#article-container .wiki-article p strong {
+	font-family: sf-bold !important;
 }
-*/
+
 
 /*!
  * This is django-wiki's LESS rules built on top of
