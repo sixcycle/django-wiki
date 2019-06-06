@@ -274,7 +274,7 @@ body {
 .container.editPage #wiki-edit-sidebar {
 	margin-top: 12px;
 	max-height: calc(100vh - 60px);
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 
