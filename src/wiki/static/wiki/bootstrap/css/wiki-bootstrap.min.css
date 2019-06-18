@@ -592,7 +592,7 @@ body {
 }*/
 
 #article-container .wiki-article p strong {
-	font-family: sf-bold !important;
+	text-shadow: 0.5px 0 0 currentColor;
 }
 
 
