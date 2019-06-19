@@ -108,6 +108,13 @@ for tag in MARKDOWN_HTML_WHITELIST:
 _default_attribute_whitelist['img'].append('src')
 _default_attribute_whitelist['img'].append('alt')
 
+_default_attribute_whitelist['iframe'].append('width')
+_default_attribute_whitelist['iframe'].append('height')
+_default_attribute_whitelist['iframe'].append('src')
+_default_attribute_whitelist['iframe'].append('frameboarder')
+_default_attribute_whitelist['iframe'].append('allow')
+_default_attribute_whitelist['iframe'].append('allowfullscreen')
+
 #: Dictionary of allowed attributes in Markdown article contents.
 MARKDOWN_HTML_ATTRIBUTES = _default_attribute_whitelist
 MARKDOWN_HTML_ATTRIBUTES.update(
