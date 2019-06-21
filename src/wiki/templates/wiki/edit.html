@@ -101,6 +101,13 @@
   paraDiv.appendChild(summaryText);
   var element = document.getElementById("div_id_summary");
   element.appendChild(paraDiv);
+
+  var noChangesCheck = document.getElementsByClassName("alert").length;
+  //var imageUploadSuccessCheck = document.getElementsByClassName("alert").length;
+  if(noChangesCheck > 0){
+    var containerClass = document.getElementsByClassName('container')[1];
+    containerClass.classList.add('errorPage');
+  }
 </script>
 <script language="javascript">
   $(document).ready(function() {
