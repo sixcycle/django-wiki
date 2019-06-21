@@ -101,6 +101,12 @@
   paraDiv.appendChild(summaryText);
   var element = document.getElementById("div_id_summary");
   element.appendChild(paraDiv);
+
+  var toastCheck = document.getElementsByClassName("alert").length;
+  if(toastCheck > 0){
+    var containerClass = document.getElementsByClassName('container')[1];
+    containerClass.classList.add('errorPage');
+  }
 </script>
 <script language="javascript">
   $(document).ready(function() {
