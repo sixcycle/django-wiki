@@ -5,7 +5,7 @@
 {% if not attachment_can_read %}
   <em>{% trans "This attachment is not permitted on this page." %}</em>
 {% else %}
-  <span class="attachment"><a href="https://sixcycle-wiki-storage.s3.amazonaws.com{{ url }}" title="{% trans "Click to download" %} {{ filename }}">
+  <span class="attachment"><a href="{{ url }}" title="{% trans "Click to download" %} {{ filename }}">
     {{ title }}{% if size %} [{{ size|filesizeformat }}]{% endif %}
   </a>
   </span>
