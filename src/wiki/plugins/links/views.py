@@ -53,10 +53,10 @@ class QueryUrlPath(View):
             ))
             matches = models.URLPath.objects.can_read(
                 request.user).active().filter(
-                Q(article__current_revision__title__contains=query, article__current_revision__deleted=False) |
-                Q(article__current_revision__content__contains=query, article__current_revision__deleted=False) |
-                Q(article__owner__email__contains=query, article__current_revision__deleted=False) |
-                Q(article__owner__name__contains=query, article__current_revision__deleted=False)
+                Q(article__current_revision__title__icontains=query, article__current_revision__deleted=False) |
+                Q(article__current_revision__content__icontains=query, article__current_revision__deleted=False) |
+                Q(article__owner__email__icontains=query, article__current_revision__deleted=False) |
+                Q(article__owner__name__icontains=query, article__current_revision__deleted=False)
             )
             print("matches are {}".format(
                 matches
