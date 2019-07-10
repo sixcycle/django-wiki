@@ -53,14 +53,13 @@ class QueryUrlPath(View):
             # ))
             matches = models.URLPath.objects.can_read(
                 request.user).active().filter(
-                Q(article__current_revision__title__icontains=query, article__current_revision__deleted=False) |
-                Q(article__current_revision__content__icontains=query, article__current_revision__deleted=False) |
-                Q(article__owner__email__icontains=query, article__current_revision__deleted=False) |
-                Q(article__owner__name__icontains=query, article__current_revision__deleted=False)
-            )
-            print("matches are {}".format(
-                matches
-            ))
+                Q(article__current_revision__title__icontains=query, article__current_revision__deleted=False) | # title
+                Q(article__current_revision__content__icontains=query, article__current_revision__deleted=False) | # content
+                Q(article__owner__name__icontains=query, article__current_revision__deleted=False) # authors name
+            ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
+            # print("matches are {}".format(
+            #     matches
+            # ))
             matches = matches.select_related_common()
             matches = [
                 "[{title:s}](wiki:{url:s})".format(
