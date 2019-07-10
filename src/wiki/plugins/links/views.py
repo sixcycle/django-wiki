@@ -48,9 +48,9 @@ class QueryUrlPath(View):
                     article__owner=user
                 )
             )
-            print("matches are {}".format(
-                matches
-            ))
+            # print("matches are {}".format(
+            #     matches
+            # ))
             matches = models.URLPath.objects.can_read(
                 request.user).active().filter(
                 Q(article__current_revision__title__icontains=query, article__current_revision__deleted=False) |
@@ -66,7 +66,8 @@ class QueryUrlPath(View):
                 "[{title:s}](wiki:{url:s})".format(
                     title=m.article.current_revision.title,
                     url='/' + m.path.strip("/")
-                ) for m in matches[:max_num]
+                # ) for m in matches[:max_num]
+                ) for m in matches # no slicing to get all responses back
             ]
 
         return object_to_json_response(matches)
