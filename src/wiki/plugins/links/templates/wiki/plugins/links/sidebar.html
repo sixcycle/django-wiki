@@ -9,7 +9,6 @@
 <pre>[Title of link](wiki:ArticleSlug)</pre>
 
 <div class="input-group">
-  <!-- wrapping in a span to make it work -->
   <input type="text" class="page_title_query c" id="links_page_title_query" value="" placeholder="Type to search..." />
   <span class="input-group-btn">
     <button type="button" class="btn btn-default" onclick="wikiInsertLink()">
@@ -35,7 +34,7 @@
         remote: "{% url 'wiki:links_query_urlpath' path=urlpath.path article_id=article.id %}?query=%QUERY",
         dataType: String
       });
-      $('.page_title_query').('background-color', 'white');
+      // $('.page_title_query').('background-color', 'white');
       $('.form-control').('background-color', 'white');
   });
 
