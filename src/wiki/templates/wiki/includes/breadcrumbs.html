@@ -36,7 +36,8 @@
       </ul>
     </div>
   </div>
-  <div class="pull-left" style="margin-left: 10px;">
+  {% if user.organizationadmins_set.all %}
+    <div class="pull-left" style="margin-left: 10px;">
     <div class="btn-group">
       <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 7px; background-color: #5eb975; border-color: #5eb975;" title="{% trans "Sub-articles for" %} {{ article.current_revision.title }}">
         <span class="fa fa-file"></span>
@@ -57,8 +58,11 @@
         </li>
       </ul>
     </div>
-  </div>  
-  {% include "wiki/includes/article_menu.html" %}
+  </div>
+    {% include "wiki/includes/article_menu.html" %}
+  {% else %}
+    <div></div>
+  {% endif %}
 </div>
 
 <div style="clear: both"></div>
