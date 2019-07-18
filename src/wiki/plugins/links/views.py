@@ -58,7 +58,7 @@ class QueryUrlPath(View):
             active_user_matches = models.URLPath.objects.can_read(request.user).active()
 
             title_matches = active_user_matches.filter(
-                article__current_revision__title__icontains=query, article__current_revision__deleted=False
+                article__current_revision__title__istartswith=query, article__current_revision__deleted=False
             ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
 
             content_matches = active_user_matches.filter(
@@ -66,7 +66,7 @@ class QueryUrlPath(View):
             ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
 
             author_matches = active_user_matches.filter(
-                article__owner__name__icontains=query, article__current_revision__deleted=False
+                article__owner__name__istartswith=query, article__current_revision__deleted=False
             ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
 
             title_matches = title_matches.select_related_common()
