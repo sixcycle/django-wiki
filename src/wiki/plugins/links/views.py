@@ -71,7 +71,9 @@ class QueryUrlPath(View):
 
             title_matches = title_matches.select_related_common()
             title_matches = [
-                "Title: {title:s}".format(title=m.article.current_revision.title
+                "Title: [{title:s}](wiki:{url:s})".format(
+                    title=m.article.current_revision.title,
+                    url='/' + m.path.strip("/")
                 # ) for m in matches[:max_num]
                 ) for m in title_matches # no slicing to get all responses back
             ]
