@@ -10,7 +10,7 @@
   <li class="active">{{ article.current_revision.title|truncatechars:25 }}</li>
 </ul>
 <div id='greenBtnWrapper' style='display: inline-block'>
-  {% if user.organizationadmins_set.all %}
+  {% if user.organizationadmins_set.all or user.owned_articles.all %}
     <div class="pull-left" style="margin-left: 10px;">
     <div class="btn-group">
       <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 7px; background-color: #5eb975; border-color: #5eb975;" title="{% trans "Sub-articles for" %} {{ article.current_revision.title }}">
