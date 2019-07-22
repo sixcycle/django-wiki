@@ -49,12 +49,6 @@ class QueryUrlPath(View):
                 )
             )
 
-            # matches = models.URLPath.objects.can_read(request.user).active().filter(
-            #     Q(article__current_revision__title__icontains=query, article__current_revision__deleted=False) | # title
-            #     Q(article__current_revision__content__icontains=query, article__current_revision__deleted=False) | # content
-            #     Q(article__owner__name__icontains=query, article__current_revision__deleted=False) # authors name
-            # ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
-
             active_user_matches = models.URLPath.objects.can_read(request.user).active()
 
             title_matches = active_user_matches.filter(
@@ -71,7 +65,7 @@ class QueryUrlPath(View):
 
             title_matches = title_matches.select_related_common()
             title_matches = [
-                "Title: [{title:s}](wiki:{url:s})".format(
+                "[{title:s}](wiki:{url:s})".format(
                     title=m.article.current_revision.title,
                     url='/' + m.path.strip("/")
                 # ) for m in matches[:max_num]
@@ -80,7 +74,7 @@ class QueryUrlPath(View):
 
             content_matches = content_matches.select_related_common()
             content_matches = [
-                "Content: [{title:s}](wiki:{url:s})".format(
+                "[{title:s}](wiki:{url:s})".format(
                     title=m.article.current_revision.title,
                     url='/' + m.path.strip("/")
                 # ) for m in matches[:max_num]
@@ -89,22 +83,13 @@ class QueryUrlPath(View):
 
             author_matches = author_matches.select_related_common()
             author_matches = [
-                "Author: [{title:s}](wiki:{url:s})".format(
+                "[{title:s}](wiki:{url:s})".format(
                     title=m.article.current_revision.title,
                     url='/' + m.path.strip("/")
                 # ) for m in matches[:max_num]
                 ) for m in author_matches # no slicing to get all responses back
             ]
 
-
-            # matches = matches.select_related_common()
-            # matches = [
-            #     "[{title:s}](wiki:{url:s})".format(
-            #         title=m.article.current_revision.title,
-            #         url='/' + m.path.strip("/")
-            #     # ) for m in matches[:max_num]
-            #     ) for m in matches # no slicing to get all responses back
-            # ]
             matches = title_matches + content_matches + author_matches
 
             return object_to_json_response(matches)
