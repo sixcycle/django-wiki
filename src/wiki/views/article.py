@@ -685,30 +685,30 @@ class SearchView(ListView):
                 'organization_id',
                 flat=True
         )
+        # articles = models.Article.objects.filter(
+        #     Q(
+        #         organizationeditarticle__organization__id__in=user_orgs
+        #     ) |
+        #     Q(
+        #         organizationreadarticle__organization__id__in=user_orgs
+        #     ) |
+        #     Q(
+        #         groupeditarticle__group_id__in=user_groups
+        #     ) |
+        #     Q(
+        #         groupreadarticle__group_id__in=user_groups
+        #     ) |
+        #     Q(
+        #         usereditarticle__user=user
+        #     ) |
+        #     Q(
+        #         userreadarticle__user=user
+        #     ) |
+        #     Q(
+        #         owner=user
+        #     )
+        # )
         articles = models.Article.objects.filter(
-            Q(
-                organizationeditarticle__organization__id__in=user_orgs
-            ) |
-            Q(
-                organizationreadarticle__organization__id__in=user_orgs
-            ) |
-            Q(
-                groupeditarticle__group_id__in=user_groups
-            ) |
-            Q(
-                groupreadarticle__group_id__in=user_groups
-            ) |
-            Q(
-                usereditarticle__user=user
-            ) |
-            Q(
-                userreadarticle__user=user
-            ) |
-            Q(
-                owner=user
-            )
-        )
-        articles = articles.filter(
             Q(current_revision__title__icontains=self.query) |
             Q(current_revision__content__icontains=self.query) |
             Q(owner__name__icontains=self.query) |

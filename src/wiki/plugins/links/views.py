@@ -25,31 +25,31 @@ class QueryUrlPath(View):
         matches = []
 
         if query:
-            matches = models.URLPath.objects.filter(
-                Q(
-                    article__organizationeditarticle__organization__id__in=user_orgs
-                ) |
-                Q(
-                    article__organizationreadarticle__organization__id__in=user_orgs
-                ) |
-                Q(
-                    article__groupeditarticle__group_id__in=user_groups
-                ) |
-                Q(
-                    article__groupreadarticle__group_id__in=user_groups
-                ) |
-                Q(
-                    article__usereditarticle__user=user
-                ) |
-                Q(
-                    article__userreadarticle__user=user
-                ) |
-                Q(
-                    article__owner=user
-                )
-            )
+            # matches = models.URLPath.objects.filter(
+            #     Q(
+            #         article__organizationeditarticle__organization__id__in=user_orgs
+            #     ) |
+            #     Q(
+            #         article__organizationreadarticle__organization__id__in=user_orgs
+            #     ) |
+            #     Q(
+            #         article__groupeditarticle__group_id__in=user_groups
+            #     ) |
+            #     Q(
+            #         article__groupreadarticle__group_id__in=user_groups
+            #     ) |
+            #     Q(
+            #         article__usereditarticle__user=user
+            #     ) |
+            #     Q(
+            #         article__userreadarticle__user=user
+            #     ) |
+            #     Q(
+            #         article__owner=user
+            #     )
+            # )
 
-            active_user_matches = matches.can_read(request.user).active()
+            active_user_matches = models.URLPath.objects.can_read(request.user).active()
 
             title_matches = active_user_matches.filter(
                 article__current_revision__title__istartswith=query, article__current_revision__deleted=False
