@@ -49,7 +49,7 @@ class QueryUrlPath(View):
                 )
             )
 
-            active_user_matches = models.URLPath.objects.can_read(request.user).active()
+            active_user_matches = matches.can_read(request.user).active()
 
             title_matches = active_user_matches.filter(
                 article__current_revision__title__istartswith=query, article__current_revision__deleted=False
