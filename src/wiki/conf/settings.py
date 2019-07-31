@@ -49,6 +49,7 @@ MARKDOWN_SANITIZE_HTML = getattr(
 #: "wiki.plugins.macros.mdx.toc", "wiki.plugins.macros.mdx.wikilinks".
 MARKDOWN_KWARGS = {
     'extensions': [
+        'markdown.extensions.nl2br',
         'markdown.extensions.footnotes',
         'markdown.extensions.attr_list',
         'markdown.extensions.footnotes',
