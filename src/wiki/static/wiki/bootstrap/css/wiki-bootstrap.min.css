@@ -604,6 +604,31 @@ body {
 
 }*/
 
+@media (max-width: 635px) {
+
+	.container.editPage {
+		margin-top: 75px !important;
+	}
+
+	.container.editPage .markItUpHeader{
+		top: -145px !important;
+	}
+
+	.container.editPage #article-container {
+		margin-top: 20px !important;
+	}
+
+}
+
+@media (max-width: 400px){
+	.container.editPage .markItUpHeader{
+		height: 55px;
+	}
+	.container.editPage #wiki-edit-sidebar {
+		margin-bottom: 100px;
+	}
+}
+
 #article-container .wiki-article p strong {
 	text-shadow: 0.5px 0 0 currentColor;
 }
