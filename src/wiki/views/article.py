@@ -714,7 +714,7 @@ class SearchView(ListView):
             Q(owner__name__icontains=self.query) |
             Q(owner__email__icontains=self.query) |
             Q(current_revision__deleted=False)
-        ).distinct('current_revision__title')
+        )
 
         return articles.order_by('-current_revision__created')
 
