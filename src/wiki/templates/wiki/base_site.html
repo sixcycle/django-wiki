@@ -132,12 +132,25 @@
     <div class="container" style="margin-top: 75px;">
 
       <script language="javascript">
+        console.log('yerp')
         var containerClass = document.getElementsByClassName('container')[1];
         var navbarClass = document.getElementsByClassName('navbar')[0];
         if(window.location.href.indexOf("_edit") > -1) {
            containerClass.classList.add('editPage');
            navbarClass.classList.add('editPage');
         }
+
+      window.addEventListener('message', function(event) { 
+        console.log(event)
+        var containerClass = document.getElementsByClassName('container')[1];
+        var articleBreadcrumbs = document.getElementById('article-breadcrumbs');
+        var navbarClass = document.getElementsByClassName('navbar')[0];
+        containerClass.style.marginTop = '0px';
+        navbarClass.style.display = 'none';
+        articleBreadcrumbs.style.display = 'none';
+      });
+
+
       </script>
 
       {% wiki_messages %}
