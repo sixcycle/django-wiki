@@ -150,6 +150,40 @@
         articleBreadcrumbs.style.display = 'none';
       });
 
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+      safari = /safari/.test( userAgent ),
+      ios = /iphone|ipod|ipad/.test( userAgent );
+      var isWebView = window.navigator.userAgent.includes('wv');
+
+      if( ios ) {
+        console.log('in ios')
+          if ( safari ) {
+            console.log('in safari')
+              //browser
+          } else if ( !safari ) {
+            console.log('in web view')
+            var containerClass = document.getElementsByClassName('container')[1];
+            var articleBreadcrumbs = document.getElementById('article-breadcrumbs');
+            var navbarClass = document.getElementsByClassName('navbar')[0];
+            containerClass.style.marginTop = '0px';
+            navbarClass.style.display = 'none';
+            articleBreadcrumbs.style.display = 'none';
+          };
+      } else {
+        console.log('not ios')
+          //not iOS
+      };
+
+      if(isWebView){
+        console.log('in web view 2')
+        var containerClass = document.getElementsByClassName('container')[1];
+        var articleBreadcrumbs = document.getElementById('article-breadcrumbs');
+        var navbarClass = document.getElementsByClassName('navbar')[0];
+        containerClass.style.marginTop = '0px';
+        navbarClass.style.display = 'none';
+        articleBreadcrumbs.style.display = 'none';        
+      }
+
 
       </script>
 
