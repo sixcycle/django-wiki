@@ -6,6 +6,16 @@ from wiki.decorators import get_article
 from django.db.models import Q
 
 
+def get_all_chidren_of_an_org(matches, article_ids=[]):
+    for m in matches:
+        article_ids.append(m.id)
+        if m.get_children() == 0:
+            return m.id
+        else:
+            get_all_chidren_of_an_org(m.get_children(), article_ids)
+    return article_ids
+
+
 class QueryUrlPath(View):
 
     @method_decorator(get_article(can_read=True))
@@ -25,45 +35,49 @@ class QueryUrlPath(View):
         matches = []
 
         if query:
-            # matches = models.URLPath.objects.filter(
-            #     Q(
-            #         article__organizationeditarticle__organization__id__in=user_orgs
-            #     ) |
-            #     Q(
-            #         article__organizationreadarticle__organization__id__in=user_orgs
-            #     ) |
-            #     Q(
-            #         article__groupeditarticle__group_id__in=user_groups
-            #     ) |
-            #     Q(
-            #         article__groupreadarticle__group_id__in=user_groups
-            #     ) |
-            #     Q(
-            #         article__usereditarticle__user=user
-            #     ) |
-            #     Q(
-            #         article__userreadarticle__user=user
-            #     ) |
-            #     Q(
-            #         article__owner=user
-            #     )
-            # )
+            matches = models.URLPath.objects.filter(
+                Q(
+                    article__organizationeditarticle__organization__id__in=user_orgs
+                ) |
+                Q(
+                    article__organizationreadarticle__organization__id__in=user_orgs
+                ) |
+                Q(
+                    article__groupeditarticle__group_id__in=user_groups
+                ) |
+                Q(
+                    article__groupreadarticle__group_id__in=user_groups
+                ) |
+                Q(
+                    article__usereditarticle__user=user
+                ) |
+                Q(
+                    article__userreadarticle__user=user
+                )
+            )
 
-            active_user_matches = models.URLPath.objects.can_read(request.user).active()
+            org_urlpath_ids = get_all_chidren_of_an_org(matches)
+            org_article_ids = models.URLPath.objects.filter(id__in=org_urlpath_ids).values_list('article__id', flat=True)
 
-            # remove deleted articles
-            active_user_matches = active_user_matches.filter(current_revision__deleted=False)
+            # get the articles that the user has written 'article__owner=user'
+            author_article_ids = models.URLPath.objects.filter(article__owner=user).values_list('article__id', flat=True)
+
+            queryset = models.Article.objects.filter(
+                Q(id__in=org_article_ids) | Q(id__in=author_article_ids)
+            ).distinct()
+
+            active_user_matches = queryset.filter(current_revision__deleted=False)
 
             title_matches = active_user_matches.filter(
-                article__current_revision__title__istartswith=query, article__current_revision__deleted=False
+                article__current_revision__title__istartswith=query
             ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
 
             content_matches = active_user_matches.filter(
-                article__current_revision__content__icontains=query, article__current_revision__deleted=False
+                article__current_revision__content__icontains=query
             ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
 
             author_matches = active_user_matches.filter(
-                article__owner__name__istartswith=query, article__current_revision__deleted=False
+                article__owner__name__istartswith=query
             ).order_by('article__current_revision__title', 'article__current_revision__content', 'article__owner__name')
 
             title_matches = title_matches.select_related_common()
