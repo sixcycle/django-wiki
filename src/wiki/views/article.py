@@ -30,6 +30,16 @@ from wiki.views.mixins import ArticleMixin
 log = logging.getLogger(__name__)
 
 
+def get_all_chidren_of_an_org(matches, article_ids=[]):
+    for m in matches:
+        article_ids.append(m.id)
+        if m.get_children() == 0:
+            return m.id
+        else:
+            get_all_chidren_of_an_org(m.get_children(), article_ids)
+    return article_ids
+
+
 class ArticleView(ArticleMixin, TemplateView):
 
     template_name = "wiki/view.html"
@@ -676,44 +686,52 @@ class SearchView(ListView):
     def get_queryset(self):
         if self.request.user.is_anonymous:
             return models.Article.objects.none()
+
         user = self.request.user
-        user_groups = user.GroupMemberRelation.all().values_list(
-            'group__id',
-            flat=True
+        user_orgs = user.OrgUserRelationship.all().values_list('organization_id', flat=True)
+        user_groups = user.GroupMemberRelation.all().values_list('group__id', flat=True)
+
+        # get all the articles associated to orgs and groups and the user
+        # has the ability to read and edit
+        matches = models.URLPath.objects.filter(
+            Q(
+                article__organizationeditarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                article__organizationreadarticle__organization__id__in=user_orgs
+            ) |
+            Q(
+                article__groupeditarticle__group_id__in=user_groups
+            ) |
+            Q(
+                article__groupreadarticle__group_id__in=user_groups
+            ) |
+            Q(
+                article__usereditarticle__user=user
+            ) |
+            Q(
+                article__userreadarticle__user=user
+            )
         )
-        user_orgs = user.OrgUserRelationship.all().values_list(
-                'organization_id',
-                flat=True
-        )
-        # articles = models.Article.objects.filter(
-        #     Q(
-        #         organizationeditarticle__organization__id__in=user_orgs
-        #     ) |
-        #     Q(
-        #         organizationreadarticle__organization__id__in=user_orgs
-        #     ) |
-        #     Q(
-        #         groupeditarticle__group_id__in=user_groups
-        #     ) |
-        #     Q(
-        #         groupreadarticle__group_id__in=user_groups
-        #     ) |
-        #     Q(
-        #         usereditarticle__user=user
-        #     ) |
-        #     Q(
-        #         userreadarticle__user=user
-        #     ) |
-        #     Q(
-        #         owner=user
-        #     )
-        # )
-        articles = models.Article.objects.filter(
+
+        org_urlpath_ids = get_all_chidren_of_an_org(matches)
+        org_article_ids = models.URLPath.objects.filter(id__in=org_urlpath_ids).values_list('article__id', flat=True)
+
+        # get the articles that the user has written 'article__owner=user'
+        author_article_ids = models.URLPath.objects.filter(article__owner=user).values_list('article__id', flat=True)
+
+        queryset = models.Article.objects.filter(
+            Q(id__in=org_article_ids) | Q(id__in=author_article_ids)
+        ).distinct()
+
+        queryset = queryset.filter(current_revision__deleted=False)
+
+
+        articles = queryset.filter(
             Q(current_revision__title__icontains=self.query) |
             Q(current_revision__content__icontains=self.query) |
             Q(owner__name__icontains=self.query) |
-            Q(owner__email__icontains=self.query) |
-            Q(current_revision__deleted=False)
+            Q(owner__email__icontains=self.query)
         )
 
         return articles.order_by('-current_revision__created')
