@@ -57,16 +57,15 @@ class QueryUrlPath(View):
             )
 
             org_urlpath_ids = get_all_chidren_of_an_org(matches)
-            org_article_ids = models.URLPath.objects.filter(id__in=org_urlpath_ids).values_list('article__id', flat=True)
 
             # get the articles that the user has written 'article__owner=user'
-            author_article_ids = models.URLPath.objects.filter(article__owner=user).values_list('article__id', flat=True)
+            author_urlpath_ids = models.URLPath.objects.filter(article__owner=user).values_list('id', flat=True)
 
-            queryset = models.Article.objects.filter(
-                Q(id__in=org_article_ids) | Q(id__in=author_article_ids)
+            queryset = models.URLPath.objects.filter(
+                Q(id__in=org_urlpath_ids) | Q(id__in=author_urlpath_ids)
             ).distinct()
 
-            active_user_matches = queryset.filter(current_revision__deleted=False)
+            active_user_matches = queryset.filter(article__current_revision__deleted=False)
 
             title_matches = active_user_matches.filter(
                 article__current_revision__title__istartswith=query
