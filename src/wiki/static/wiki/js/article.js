@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   for (var i = 0; i < matches.length; i++){
     // matches[i].href.toString().includes("wiki")
-    if (!matches[i].href.toString().includes("wiki")) {
+    if (!matches[i].href.toString().includes("wiki") || matches[i].href.toString().includes("sixcycle-wiki-storage.s3.amazonaws.com")) {
      matches[i].setAttribute('target', '_blank');
     }
   }
