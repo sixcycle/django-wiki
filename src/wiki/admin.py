@@ -77,7 +77,8 @@ class URLPathAdmin(MPTTModelAdmin):
     inlines = [ArticleObjectAdmin]
     list_filter = ('site', 'articles__article__current_revision__deleted',
                    'articles__article__created',
-                   'articles__article__modified')
+                   'articles__article__modified',
+                   'article__owner')
     list_display = ('__str__', 'article', 'get_created')
     raw_id_fields = ('article',)
 
