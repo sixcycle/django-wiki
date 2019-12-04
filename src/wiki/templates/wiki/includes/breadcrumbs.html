@@ -46,10 +46,12 @@
       <ul class="dropdown-menu">
         <li>
           {% if urlpath.parent %}
-          <a href="{% url 'wiki:create' path=urlpath.parent.path %}" style="padding: 7px;">
-            <span class="fa fa-arrow-right"></span>
-            {% blocktrans with article.current_revision.title as title %}New article next to {{ title }}{% endblocktrans %}
-          </a>
+            {% if "my-articles" in urlpath|slugify %}
+              <a href="{% url 'wiki:create' path=urlpath.parent.path %}" style="padding: 7px;">
+                <span class="fa fa-arrow-right"></span>
+                {% blocktrans with article.current_revision.title as title %}New article next to {{ title }}{% endblocktrans %}
+              </a>
+            {% endif %}
           {% endif %}
           <a href="{% url 'wiki:create' path=urlpath.path %}" style="padding: 7px;">
             <span class="fa fa-arrow-down"></span>
@@ -97,10 +99,12 @@
       <ul class="dropdown-menu">
         <li>
           {% if urlpath.parent %}
-          <a href="{% url 'wiki:create' path=urlpath.parent.path %}" style="padding: 7px;">
-            <span class="fa fa-arrow-right"></span>
-            {% blocktrans with article.current_revision.title as title %}New article next to {{ title }}{% endblocktrans %}
-          </a>
+            {% if "my-articles" in urlpath|slugify %}
+              <a href="{% url 'wiki:create' path=urlpath.parent.path %}" style="padding: 7px;">
+                <span class="fa fa-arrow-right"></span>
+                {% blocktrans with article.current_revision.title as title %}New article next to {{ title }}{% endblocktrans %}
+              </a>
+            {% endif %}}
           {% endif %}
           <a href="{% url 'wiki:create' path=urlpath.path %}" style="padding: 7px;">
             <span class="fa fa-arrow-down"></span>
