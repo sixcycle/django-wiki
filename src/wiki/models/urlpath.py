@@ -354,6 +354,10 @@ class URLPath(MPTTModel):
         """Return an ordered list of all chilren"""
         return self.children.order_by('slug')
 
+    def get_ordered_children_articles(self):
+        """Return an ordered list of all children by article title"""
+        return self.children.order_by('article__current_revision__title')
+
 
 ######################################################
 # SIGNAL HANDLERS
