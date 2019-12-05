@@ -356,7 +356,20 @@ class URLPath(MPTTModel):
 
     def get_ordered_children_articles(self):
         """Return an ordered list of all children by article title"""
-        return self.children.order_by('article__current_revision__title')
+        data_1 = []
+        data_2 = []
+
+        children_ordered_by_title = self.children.order_by('article__current_revision__title')
+
+        for each in children_ordered_by_title:
+            if len(each.get_ordered_children()) != 0:
+                data_1.append(each)
+            else:
+                data_2.append(each)
+
+        full_data = data_1 + data_2
+
+        return full_data
 
 
 ######################################################
