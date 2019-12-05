@@ -68,7 +68,6 @@
           </form>
           <div class="navbar-right">
             {% if user.is_authenticated %}
-              {% if user.organizationadmins_set.all %}
               <ul class="nav navbar-nav">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style='color: white; background-color: #162a3d'>
@@ -87,12 +86,14 @@
                     </li>
                     {% endif %}
                   -->
-                  <li>
-                    <a href="{{ "LOGOUT_URL"|wiki_settings }}">
-                      <i class="fa fa-power-off"></i>
-                      {% trans "Log out" %}
-                    </a>
-                  </li>
+
+<!--                  <li>-->
+<!--                    <a href="{{ "LOGOUT_URL"|wiki_settings }}">-->
+<!--                      <i class="fa fa-power-off"></i>-->
+<!--                      {% trans "Log out" %}-->
+<!--                    </a>-->
+<!--                  </li>-->
+
                   {% if user.is_superuser %}
                   <li>
                     <a href="{% url 'wiki:deleted_list' %}">
@@ -110,7 +111,6 @@
                 </ul>
               </li>
             </ul>
-              {% endif %}
             {% else %}
             <ul class="nav navbar-nav">
               <li>
