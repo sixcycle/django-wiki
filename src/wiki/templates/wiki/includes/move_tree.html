@@ -7,7 +7,7 @@
     {{current_path.article}}
   </a>
   {% if current_path.children.count %}
-    <ul class="dropdown-menu" style="max-height:250px; overflow:auto;">
+    <ul class="dropdown-menu">
       {% for current_path in current_path.get_ordered_children_articles %}
         {% with template_name="wiki/includes/move_tree.html" %}{% include template_name %}{% endwith %}
       {% endfor %}
